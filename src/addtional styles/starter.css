@@ -1,0 +1,14 @@
+/* Optional for extra customization, or if you'd prefer to define the animation separately */
+
+.starter-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  background-color: rgba(0, 0, 0, 0.6); /* Optional: Add a semi-transparent background */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+}
