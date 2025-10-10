@@ -31,6 +31,7 @@ const App = () => {
       {showLogo && <Starter />}
       <main className="pt-20 px-4">
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/add-item" element={<AddItem />} />
           <Route path="/items-list" element={<ItemsList />} />
