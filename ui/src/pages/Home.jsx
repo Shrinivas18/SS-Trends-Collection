@@ -36,6 +36,7 @@ import thirtyTwo from "../assets/home/saree-offwhite3.jpeg";
 import thirtyThree from "../assets/home/suit-royal-blue.jpeg";
 import thirtyFour from "../assets/home/saree-pink.jpeg";
 import thirtyFive from "../assets/home/saree-red.jpeg";
+import { ELEGANCE, EXPLORE } from "../utilities/constants";
 
 const images = [
   one,
@@ -80,7 +81,7 @@ function Home() {
     <div className="w-full flex flex-col items-center justify-center">
       <div className="relative w-full h-[80vh] overflow-hidden">
         <video
-          className="absolute top-0 left-0 w-full"
+          className="absolute top-0 left-0 w-full md:hidden"
           autoPlay
           muted
           loop
@@ -89,13 +90,11 @@ function Home() {
           <source src={video} type="video/mp4" />
         </video>
 
+        <div className="absolute top-0 left-0 w-full h-full bg-black md:block hidden"></div>
+
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">
-            Elegance in Every Thread
-          </h1>
-          <p className="text-lg md:text-xl mb-6">
-            Explore our exclusive saree and suit collections
-          </p>
+          <h1 className="text-4xl md:text-6xl font-bold mb-4">{ELEGANCE}</h1>
+          <p className="text-lg md:text-xl mb-6">{EXPLORE}</p>
           {/* <button className="px-6 py-3 bg-white text-black font-semibold rounded-md hover:bg-gray-200 transition-all">
             Shop Now
           </button> */}

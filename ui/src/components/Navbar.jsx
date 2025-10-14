@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import sstrendscollection from "../assets/sstrendscollection.png";
+import sstrendscollection from "../assets/TrendsCollection2.png";
+import { SS_TRENDS_COLLECTION } from "../utilities/constants";
+import { DESKTOP_NAVBAR } from "../mode/desktopMode";
+import { MOBILE_NAVBAR } from "../mode/mobileMode";
+import { LOGO, NAVBAR } from "../mode/lightMode";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -15,30 +19,27 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-white border-b border-gray-200 fixed w-full top-0 left-0 z-50 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16 items-center">
-          <Link to="/" className="flex items-center space-x-2">
+    <nav className={NAVBAR.NAV}>
+      <div className={NAVBAR.DIV1}>
+        <div className={NAVBAR.DIV2}>
+          <Link to="/" className={NAVBAR.LINK}>
             <img
               src={sstrendscollection}
-              alt="SS Trends Collection"
-              className="h-8 w-8 object-contain"
+              alt="SS Trends Collection logo"
+              className={LOGO}
             />
-            <span className="text-xl font-semibold text-gray-900">
-              SS Trends Collection
-            </span>
           </Link>
 
           {/* Desktop Links */}
-          <div className="hidden md:flex space-x-4">
+          <div className={DESKTOP_NAVBAR.container}>
             {links.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                className={`px-3 py-2 rounded-md text-base font-medium transition ${
+                className={`${DESKTOP_NAVBAR.linkBase} ${
                   location.pathname === link.path
-                    ? "bg-blue-100 text-blue-700"
-                    : "text-gray-700 hover:bg-gray-100 hover:text-blue-700"
+                    ? DESKTOP_NAVBAR.linkActive
+                    : DESKTOP_NAVBAR.linkInactive
                 }`}
               >
                 {link.name}
@@ -50,7 +51,7 @@ const Navbar = () => {
           <div className="md:hidden">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+              className={MOBILE_NAVBAR.button}
             >
               {menuOpen ? (
                 <svg
@@ -90,17 +91,17 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden border-t border-gray-200 bg-white shadow-sm">
-          <div className="flex flex-col items-center space-y-2 py-3">
+        <div className={MOBILE_NAVBAR.menuContainer}>
+          <div className={MOBILE_NAVBAR.linkWrapper}>
             {links.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
                 onClick={() => setMenuOpen(false)}
-                className={`w-full text-center px-4 py-2 rounded-md text-base font-medium transition ${
+                className={`${MOBILE_NAVBAR.linkBase} ${
                   location.pathname === link.path
-                    ? "bg-blue-100 text-blue-700"
-                    : "text-gray-700 hover:bg-gray-100 hover:text-blue-700"
+                    ? MOBILE_NAVBAR.linkActive
+                    : MOBILE_NAVBAR.linkInactive
                 }`}
               >
                 {link.name}
