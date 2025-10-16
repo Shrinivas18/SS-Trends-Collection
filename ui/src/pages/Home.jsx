@@ -37,6 +37,11 @@ import thirtyThree from "../assets/home/suit-royal-blue.jpeg";
 import thirtyFour from "../assets/home/saree-pink.jpeg";
 import thirtyFive from "../assets/home/saree-red.jpeg";
 import { ELEGANCE, EXPLORE } from "../utilities/constants";
+import {
+  HOME_MD_VIDEO_DIV,
+  HOME_MD_VIDEO_DIV_TEXT,
+  HOME_SECTION,
+} from "../mode/lightMode";
 
 const images = [
   one,
@@ -90,9 +95,9 @@ function Home() {
           <source src={video} type="video/mp4" />
         </video>
 
-        <div className="absolute top-0 left-0 w-full h-full bg-black md:block hidden"></div>
+        <div className={HOME_MD_VIDEO_DIV}></div>
 
-        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
+        <div className={HOME_MD_VIDEO_DIV_TEXT}>
           <h1 className="text-4xl md:text-6xl font-bold mb-4">{ELEGANCE}</h1>
           <p className="text-lg md:text-xl mb-6">{EXPLORE}</p>
           {/* <button className="px-6 py-3 bg-white text-black font-semibold rounded-md hover:bg-gray-200 transition-all">
@@ -101,21 +106,16 @@ function Home() {
         </div>
       </div>
 
-      <section className="py-10 px-4 md:px-10 lg:px-20 w-full bg-gray-50">
-        <h2 className="text-3xl font-semibold text-center mb-10 text-gray-800">
-          Our Collection
-        </h2>
+      <section className={HOME_SECTION.SECTION}>
+        <h2 className={HOME_SECTION.HEADER}>Our Collection</h2>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <div className={HOME_SECTION.IMAGE_GRID}>
           {images.map((img, index) => (
-            <div
-              key={index}
-              className="overflow-hidden rounded-lg shadow hover:shadow-lg transition-shadow duration-300 bg-white"
-            >
+            <div key={index} className={HOME_SECTION.IMAGE_DIV}>
               <img
                 src={img}
                 alt={`Product ${index + 1}`}
-                className="w-full h-48 sm:h-60 md:h-64 object-cover transform hover:scale-105 transition-transform duration-300"
+                className={HOME_SECTION.IMAGE}
               />
             </div>
           ))}

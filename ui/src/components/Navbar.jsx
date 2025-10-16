@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import sstrendscollection from "../assets/TrendsCollection2.png";
 import { SS_TRENDS_COLLECTION } from "../utilities/constants";
-import { DESKTOP_NAVBAR } from "../mode/desktopMode";
-import { MOBILE_NAVBAR } from "../mode/mobileMode";
-import { LOGO, NAVBAR } from "../mode/lightMode";
+import { DESKTOP_NAVBAR, LOGO, MOBILE_NAVBAR, NAVBAR } from "../mode/lightMode";
+import TorchToggle from "./toggleMode";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -110,6 +109,7 @@ const Navbar = () => {
           </div>
         </div>
       )}
+      <TorchToggle />
     </nav>
   );
 };

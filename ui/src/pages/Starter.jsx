@@ -10,7 +10,7 @@ import {
   TEXT_VARIANT,
   WELCOME_TO_SS_TRENDS_COLLECTION,
   YOUR_FASHION_YOUR_STYLE,
-} from "../color-mode/lightmode";
+} from "../mode/lightMode";
 
 function Starter() {
   return (

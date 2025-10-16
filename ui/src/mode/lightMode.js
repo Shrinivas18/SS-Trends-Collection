@@ -62,4 +62,22 @@ export const NAVBAR = {
   DIV2: "flex justify-between h-16 items-center",
   LINK: "h-15 w-25 md:h-20 md:w-30 object-contain",
 };
+
 export const LOGO = "h-15 w-25 md:h-20 md:w-30 object-contain";
+
+export const HOME_SECTION = {
+  SECTION: "py-10 px-4 md:px-10 lg:px-20 w-full bg-gray-50",
+  HEADER: "text-3xl font-semibold text-center mb-10 text-gray-800",
+  IMAGE_GRID:
+    "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4",
+  IMAGE_DIV:
+    "overflow-hidden rounded-lg shadow hover:shadow-lg transition-shadow duration-300 bg-white",
+  IMAGE:
+    "w-full h-48 sm:h-60 md:h-64 object-cover transform hover:scale-105 transition-transform duration-300",
+};
+
+export const HOME_MD_VIDEO_DIV =
+  "absolute top-0 left-0 w-full h-full bg-black sm:block hidden";
+
+export const HOME_MD_VIDEO_DIV_TEXT =
+  "relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4";
