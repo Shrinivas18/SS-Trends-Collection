@@ -57,8 +57,8 @@ export const MOBILE_NAVBAR = {
 };
 
 export const NAVBAR = {
-  NAV: "bg-white border-b border-gray-200 fixed w-full top-0 left-0 z-50 shadow-sm",
-  DIV1: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+  NAV: " border-b border-gray-200 fixed w-full top-0 left-0 z-50 shadow-sm bg-white",
+  DIV1: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8  bg-white",
   DIV2: "flex justify-between h-16 items-center",
   LINK: "h-15 w-25 md:h-20 md:w-30 object-contain",
 };
@@ -77,7 +77,18 @@ export const HOME_SECTION = {
 };
 
 export const HOME_MD_VIDEO_DIV =
-  "absolute top-0 left-0 w-full h-full bg-black sm:block hidden";
+  "absolute top-0 left-0 w-full h-full bg-violet-900 sm:block hidden";
 
 export const HOME_MD_VIDEO_DIV_TEXT =
   "relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4";
+
+// toggle button light mode
+export const LIGHT_MODE = {
+  ICON: "M12 4V2m0 20v-2m10-8h2M2 12H0m18.364-6.364l1.414-1.414M4.222 19.778l1.414-1.414M18.364 18.364l1.414 1.414M4.222 4.222l1.414 1.414M12 6a6 6 0 100 12 6 6 0 000-12z",
+  ANIMATE:
+    "bg-yellow-400 shadow-[0_0_20px_8px_rgba(255,255,0,0.6)] animate-[torch-glow_2s_ease-in-out_infinite]",
+  POSITION:
+    "relative mr-2 mt-4 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer",
+  tooltip:
+    "absolute -top-8 mr-45 translate-x-1/2 whitespace-nowrap bg-gray-800 text-white text-xs p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none",
+};

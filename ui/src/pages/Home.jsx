@@ -100,9 +100,9 @@ function Home() {
         <div className={HOME_MD_VIDEO_DIV_TEXT}>
           <h1 className="text-4xl md:text-6xl font-bold mb-4">{ELEGANCE}</h1>
           <p className="text-lg md:text-xl mb-6">{EXPLORE}</p>
-          {/* <button className="px-6 py-3 bg-white text-black font-semibold rounded-md hover:bg-gray-200 transition-all">
+          <button className="px-6 py-3 bg-white text-black font-semibold rounded-md hover:bg-gray-200 transition-all">
             Shop Now
-          </button> */}
+          </button>
         </div>
       </div>
 
