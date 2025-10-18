@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import sstrendscollection from "../assets/TrendsCollection2.png";
 import { SS_TRENDS_COLLECTION } from "../utilities/constants";
-import { DESKTOP_NAVBAR, LOGO, MOBILE_NAVBAR, NAVBAR } from "../mode/lightMode";
+import {
+  DESKTOP_NAVBAR,
+  LIGHT_MODE_NAVBAR,
+  LOGO,
+  MOBILE_NAVBAR,
+} from "../mode/lightMode";
 import TorchToggle from "./toggleMode";
 
 const Navbar = () => {
@@ -18,10 +23,10 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={NAVBAR.NAV}>
-      <div className={NAVBAR.DIV1}>
-        <div className={NAVBAR.DIV2}>
-          <Link to="/" className={NAVBAR.LINK}>
+    <nav className={LIGHT_MODE_NAVBAR.NAV}>
+      <div className={LIGHT_MODE_NAVBAR.DIV1}>
+        <div className={LIGHT_MODE_NAVBAR.DIV2}>
+          <Link to="/" className={LIGHT_MODE_NAVBAR.LINK}>
             <img
               src={sstrendscollection}
               alt="SS Trends Collection logo"

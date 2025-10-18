@@ -56,7 +56,7 @@ export const MOBILE_NAVBAR = {
   linkInactive: "text-gray-700 hover:bg-gray-100 hover:text-blue-700",
 };
 
-export const NAVBAR = {
+export const LIGHT_MODE_NAVBAR = {
   NAV: " border-b border-gray-200 fixed w-full top-0 left-0 z-50 shadow-sm bg-white",
   DIV1: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8  bg-white",
   DIV2: "flex justify-between h-16 items-center",
