@@ -41,7 +41,7 @@ import {
   HOME_MD_VIDEO_DIV,
   HOME_MD_VIDEO_DIV_TEXT,
   HOME_SECTION,
-} from "../mode/lightMode";
+} from "../features/mode/lightMode";
 
 const images = [
   one,

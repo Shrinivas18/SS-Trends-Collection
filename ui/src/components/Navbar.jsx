@@ -7,7 +7,7 @@ import {
   LIGHT_MODE_NAVBAR,
   LOGO,
   MOBILE_NAVBAR,
-} from "../mode/lightMode";
+} from "../features/mode/lightMode";
 import TorchToggle from "./toggleMode";
 
 const Navbar = () => {

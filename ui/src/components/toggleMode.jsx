@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { LIGHT_MODE } from "../mode/lightMode";
-import { DARK_MODE } from "../mode/darkMode";
+import { LIGHT_MODE } from "../features/mode/lightMode";
+import { DARK_MODE } from "../features/mode/darkMode";
 
 const TorchToggle = () => {
   const [darkMode, setDarkMode] = useState(
