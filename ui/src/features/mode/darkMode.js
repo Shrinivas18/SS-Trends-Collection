@@ -8,4 +8,28 @@ export const DARK_MODE_NAVBAR = {
   DIV1: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-gray-700",
   DIV2: "flex justify-between h-16 items-center",
   LINK: "h-15 w-25 md:h-20 md:w-30 object-contain",
+  DESKTOP_LINK_ACTIVE: "bg-white text-black",
+  DESKTOP_LINK_INACTIVE: "text-white hover:bg-white-100 hover:text-blue-700",
+};
+
+export const DARK_MODE_MOBILE_NAVBAR = {
+  button:
+    "inline-flex items-center justify-center p-2 rounded-md text-white hover:text-blue-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500",
+  menuContainer: "md:hidden  bg-gray-700 shadow-sm text-black",
+  linkWrapper: "flex flex-col items-center space-y-2 py-3",
+  linkBase:
+    "w-full text-center px-4 py-2 rounded-md text-base font-medium transition duration-200",
+  LINK_ACTIVE: "bg-white text-black",
+  LINK_INACTIVE: "text-white hover:bg-white-100 hover:text-blue-700",
+};
+
+export const DARK_MODE_HOME_SECTION = {
+  SECTION: "py-10 px-4 md:px-10 lg:px-20 w-full bg-gray-50",
+  HEADER: "text-3xl font-semibold text-center mb-10 text-gray-800",
+  IMAGE_GRID:
+    "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4",
+  IMAGE_DIV:
+    "overflow-hidden rounded-lg shadow hover:shadow-lg transition-shadow duration-300 bg-black",
+  IMAGE:
+    "w-full h-48 sm:h-60 md:h-64 object-cover transform hover:scale-105 transition-transform duration-300",
 };

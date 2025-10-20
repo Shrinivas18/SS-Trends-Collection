@@ -1,29 +1,38 @@
-// src/features/counter/counterSlice.js
 import { createSlice } from "@reduxjs/toolkit";
+import { v4 as uuid } from "uuid";
 
 export const ssReducer = createSlice({
-  name: "SS Trends Collection",
-  initialState: {
-    code: "",
-    type: "",
-    retailPrice: "",
-    sellingPrice: "",
-    soldAt: "",
-    profit: "",
-  },
+  name: "ssTrendsCollection",
+  initialState: [],
   reducers: {
-    add: (state) => {
-      state.value += 1;
+    addItem: {
+      reducer(state, action) {
+        state.push(action.payload);
+      },
+      prepare(data) {
+        return {
+          payload: {
+            id: uuid(),
+            ...data,
+          },
+        };
+      },
     },
-    decrement: (state) => {
-      state.value -= 1;
+
+    updateItem(state, action) {
+      const { id, updates } = action.payload;
+      const index = state.findIndex((item) => item.id === id);
+      if (index !== -1) {
+        state[index] = { ...state[index], ...updates };
+      }
     },
-    reset: (state) => {
-      state.value = 0;
+
+    deleteItem(state, action) {
+      return state.filter((item) => item.id !== action.payload);
     },
   },
 });
 
-export const { increment, decrement, reset } = ssReducer.actions;
+export const { addItem, updateItem, deleteItem } = ssReducer.actions;
 
 export default ssReducer.reducer;

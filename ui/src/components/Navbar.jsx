@@ -8,11 +8,19 @@ import {
   LOGO,
   MOBILE_NAVBAR,
 } from "../features/mode/lightMode";
+import {
+  DARK_MODE,
+  DARK_MODE_NAVBAR,
+  DARK_MODE_MOBILE_NAVBAR,
+} from "../features/mode/darkMode";
 import TorchToggle from "./toggleMode";
+import { useTheme } from "../context/useTheme";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  const isDarkMode = useTheme();
+  console.log("darkMode::", isDarkMode.darkMode);
 
   const links = [
     { name: "Add", path: "/add-item" },
@@ -23,10 +31,29 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={LIGHT_MODE_NAVBAR.NAV}>
-      <div className={LIGHT_MODE_NAVBAR.DIV1}>
-        <div className={LIGHT_MODE_NAVBAR.DIV2}>
-          <Link to="/" className={LIGHT_MODE_NAVBAR.LINK}>
+    <nav
+      className={
+        isDarkMode.darkMode ? DARK_MODE_NAVBAR.NAV : LIGHT_MODE_NAVBAR.NAV
+      }
+    >
+      <div
+        className={
+          isDarkMode.darkMode ? DARK_MODE_NAVBAR.DIV1 : LIGHT_MODE_NAVBAR.DIV1
+        }
+      >
+        <div
+          className={
+            isDarkMode.darkMode ? DARK_MODE_NAVBAR.DIV2 : LIGHT_MODE_NAVBAR.DIV2
+          }
+        >
+          <Link
+            to="/"
+            className={
+              isDarkMode.darkMode
+                ? DARK_MODE_NAVBAR.LINK
+                : LIGHT_MODE_NAVBAR.LINK
+            }
+          >
             <img
               src={sstrendscollection}
               alt="SS Trends Collection logo"
@@ -42,8 +69,12 @@ const Navbar = () => {
                 to={link.path}
                 className={`${DESKTOP_NAVBAR.linkBase} ${
                   location.pathname === link.path
-                    ? DESKTOP_NAVBAR.linkActive
-                    : DESKTOP_NAVBAR.linkInactive
+                    ? isDarkMode.darkMode
+                      ? DARK_MODE_NAVBAR.DESKTOP_LINK_ACTIVE
+                      : DESKTOP_NAVBAR.DESKTOP_LINK_ACTIVE
+                    : isDarkMode.darkMode
+                    ? DARK_MODE_NAVBAR.DESKTOP_LINK_INACTIVE
+                    : DESKTOP_NAVBAR.DESKTOP_LINK_INACTIVE
                 }`}
               >
                 {link.name}
@@ -63,7 +94,7 @@ const Navbar = () => {
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={2}
-                  stroke="currentColor"
+                  stroke={isDarkMode.darkMode ? "white" : "black"}
                   className="w-6 h-6"
                 >
                   <path
@@ -78,7 +109,7 @@ const Navbar = () => {
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={2}
-                  stroke="currentColor"
+                  stroke={isDarkMode.darkMode ? "white" : "black"}
                   className="w-6 h-6"
                 >
                   <path
@@ -95,8 +126,20 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className={MOBILE_NAVBAR.menuContainer}>
-          <div className={MOBILE_NAVBAR.linkWrapper}>
+        <div
+          className={
+            isDarkMode.darkMode
+              ? DARK_MODE_MOBILE_NAVBAR.menuContainer
+              : MOBILE_NAVBAR.menuContainer
+          }
+        >
+          <div
+            className={
+              isDarkMode.darkMode
+                ? DARK_MODE_MOBILE_NAVBAR.linkWrapper
+                : MOBILE_NAVBAR.linkWrapper
+            }
+          >
             {links.map((link) => (
               <Link
                 key={link.name}
@@ -104,7 +147,11 @@ const Navbar = () => {
                 onClick={() => setMenuOpen(false)}
                 className={`${MOBILE_NAVBAR.linkBase} ${
                   location.pathname === link.path
-                    ? MOBILE_NAVBAR.linkActive
+                    ? isDarkMode.darkMode
+                      ? DARK_MODE_MOBILE_NAVBAR.LINK_ACTIVE
+                      : MOBILE_NAVBAR.linkActive
+                    : isDarkMode.darkMode
+                    ? DARK_MODE_MOBILE_NAVBAR.LINK_INACTIVE
                     : MOBILE_NAVBAR.linkInactive
                 }`}
               >

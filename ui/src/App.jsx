@@ -8,6 +8,7 @@ import Sold from "./pages/Sold";
 import Profit from "./pages/Profit";
 import Home from "./pages/Home";
 import Starter from "./pages/Starter";
+import { ThemeProvider } from "./context/ThemeContext";
 
 const App = () => {
   const [showLogo, setShowLogo] = useState(false);
@@ -26,21 +27,23 @@ const App = () => {
   }, []);
 
   return (
-    <div>
-      {!showLogo && <Navbar />}
-      {showLogo && <Starter />}
-      <main className="pt-20 px-4">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/add-item" element={<AddItem />} />
-          <Route path="/items-list" element={<ItemsList />} />
-          <Route path="/stock" element={<Stock />} />
-          <Route path="/sold" element={<Sold />} />
-          <Route path="/profit" element={<Profit />} />
-        </Routes>
-      </main>
-    </div>
+    <ThemeProvider>
+      <div>
+        {!showLogo && <Navbar />}
+        {showLogo && <Starter />}
+        <main className="pt-20 px-4">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/add-item" element={<AddItem />} />
+            <Route path="/items-list" element={<ItemsList />} />
+            <Route path="/stock" element={<Stock />} />
+            <Route path="/sold" element={<Sold />} />
+            <Route path="/profit" element={<Profit />} />
+          </Routes>
+        </main>
+      </div>
+    </ThemeProvider>
   );
 };
 

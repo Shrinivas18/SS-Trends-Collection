@@ -1,30 +1,18 @@
-import React, { useEffect, useState } from "react";
+// src/components/TorchToggle.js
+import React from "react";
+import { useTheme } from "../context/useTheme";
 import { LIGHT_MODE } from "../features/mode/lightMode";
 import { DARK_MODE } from "../features/mode/darkMode";
 
 const TorchToggle = () => {
-  const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("theme") === "dark"
-  );
-
-  // Apply theme on mount
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", darkMode);
-  }, [darkMode]);
-
-  const toggleDarkMode = () => {
-    const newMode = !darkMode;
-    setDarkMode(newMode);
-    localStorage.setItem("theme", newMode ? "dark" : "light");
-  };
+  const { darkMode, toggleDarkMode } = useTheme();
 
   return (
     <div className="fixed top-[72px] right-4 z-50">
       <button
         onClick={toggleDarkMode}
         className={`${LIGHT_MODE.POSITION} relative group
-          ${darkMode ? LIGHT_MODE.ANIMATE : DARK_MODE.ANIMATE}
-        `}
+                ${darkMode ? LIGHT_MODE.ANIMATE : DARK_MODE.ANIMATE}`}
       >
         <span className={LIGHT_MODE.tooltip}>
           {darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}

@@ -40,9 +40,9 @@ export const STARTER_IMAGE = {
 export const DESKTOP_NAVBAR = {
   container: "hidden md:flex space-x-4",
   linkBase:
-    "px-3 py-2 rounded-md text-base font-medium transition duration-200",
-  linkActive: "bg-blue-100 text-blue-700",
-  linkInactive: "text-gray-700 hover:bg-gray-100 hover:text-blue-700",
+    "px-3 py-2 rounded-md text-base font-medium transition duration-200 ",
+  DESKTOP_LINK_ACTIVE: "text-gray-700 bg-blue-100 text-blue-700",
+  DESKTOP_LINK_INACTIVE: "text-gray-700 hover:bg-gray-100 hover:text-blue-700",
 };
 
 export const MOBILE_NAVBAR = {
