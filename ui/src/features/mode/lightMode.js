@@ -1,3 +1,5 @@
+export const MAIN_CLASS = "pt-20 px-4 bg-gray-50";
+
 export const STARTER_CLOTH =
   "w-[35vw] sm:w-[30vw] md:w-[25vw] lg:w-[20vw] h-auto pointer-events-none";
 

@@ -9,10 +9,14 @@ import Profit from "./pages/Profit";
 import Home from "./pages/Home";
 import Starter from "./pages/Starter";
 import { ThemeProvider } from "./context/ThemeContext";
+import { useTheme } from "./context/useTheme";
+import { MAIN_CLASS } from "./features/mode/lightMode";
+import { DARK_MODE_MAIN_CLASS } from "./features/mode/darkMode";
 
 const App = () => {
   const [showLogo, setShowLogo] = useState(false);
-
+  const isDarkMode = useTheme();
+  console.log("isDarkMode::", isDarkMode);
   useEffect(() => {
     const hasShownLogo = sessionStorage.getItem("logoShown");
 
@@ -27,23 +31,21 @@ const App = () => {
   }, []);
 
   return (
-    <ThemeProvider>
-      <div>
-        {!showLogo && <Navbar />}
-        {showLogo && <Starter />}
-        <main className="pt-20 px-4">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/add-item" element={<AddItem />} />
-            <Route path="/items-list" element={<ItemsList />} />
-            <Route path="/stock" element={<Stock />} />
-            <Route path="/sold" element={<Sold />} />
-            <Route path="/profit" element={<Profit />} />
-          </Routes>
-        </main>
-      </div>
-    </ThemeProvider>
+    <div>
+      {!showLogo && <Navbar />}
+      {showLogo && <Starter />}
+      <main className={isDarkMode.darkMode ? DARK_MODE_MAIN_CLASS : MAIN_CLASS}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/add-item" element={<AddItem />} />
+          <Route path="/items-list" element={<ItemsList />} />
+          <Route path="/stock" element={<Stock />} />
+          <Route path="/sold" element={<Sold />} />
+          <Route path="/profit" element={<Profit />} />
+        </Routes>
+      </main>
+    </div>
   );
 };
 

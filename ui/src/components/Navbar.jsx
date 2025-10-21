@@ -20,7 +20,6 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
   const isDarkMode = useTheme();
-  console.log("darkMode::", isDarkMode.darkMode);
 
   const links = [
     { name: "Add", path: "/add-item" },
