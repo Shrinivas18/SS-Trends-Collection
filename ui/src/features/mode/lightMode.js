@@ -94,3 +94,17 @@ export const LIGHT_MODE = {
   tooltip:
     "absolute -top-8 mr-45 translate-x-1/2 whitespace-nowrap bg-gray-800 text-white text-xs p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none",
 };
+
+export const ADD_ITEM = {
+  FORM_CONTAINER:
+    "max-w-4xl mx-auto p-8 bg-white rounded-lg shadow-lg transition-all ease-in-out duration-300",
+  INPUT:
+    "mt-1 block w-full p-4 rounded-md border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg hover:shadow-xl transition-all ease-in-out duration-200",
+  SELECT:
+    "mt-1 block w-full p-4 rounded-md border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg hover:shadow-xl transition-all ease-in-out duration-200",
+  BUTTON:
+    "w-full bg-indigo-600 text-white p-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg hover:shadow-xl transition-all ease-in-out duration-200",
+  LABEL: "block text-sm font-semibold text-gray-700 mb-2",
+  HEADER: "text-3xl font-bold text-center text-gray-800 mb-6",
+  SUBTEXT: "text-sm text-gray-500 text-center mb-4",
+};

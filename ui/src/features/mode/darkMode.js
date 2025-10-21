@@ -35,3 +35,17 @@ export const DARK_MODE_HOME_SECTION = {
   IMAGE:
     "w-full h-48 sm:h-60 md:h-64 object-cover transform hover:scale-105 transition-transform duration-300",
 };
+
+export const DARK_MODE_ADD_ITEM = {
+  FORM_CONTAINER:
+    "max-w-4xl mx-auto p-8 bg-gray-800 rounded-lg shadow-lg transition-all ease-in-out duration-300",
+  INPUT:
+    "mt-1 block w-full p-4 rounded-md border border-gray-600 bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg hover:shadow-xl transition-all ease-in-out duration-200",
+  SELECT:
+    "mt-1 block w-full p-4 rounded-md border border-gray-600 bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg hover:shadow-xl transition-all ease-in-out duration-200",
+  BUTTON:
+    "w-full bg-indigo-600 text-white p-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg hover:shadow-xl transition-all ease-in-out duration-200",
+  LABEL: "block text-sm font-semibold text-gray-300 mb-2",
+  HEADER: "text-3xl font-bold text-center text-white mb-6",
+  SUBTEXT: "text-sm text-gray-400 text-center mb-4",
+};

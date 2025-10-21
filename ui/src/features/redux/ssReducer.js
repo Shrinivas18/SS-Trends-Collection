@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { v4 as uuid } from "uuid";
 
 export const ssReducer = createSlice({
   name: "ssTrendsCollection",
@@ -20,14 +19,6 @@ export const ssReducer = createSlice({
     addItem: {
       reducer(state, action) {
         state.push(action.payload);
-      },
-      prepare(data) {
-        return {
-          payload: {
-            id: uuid(),
-            ...data,
-          },
-        };
       },
     },
 
