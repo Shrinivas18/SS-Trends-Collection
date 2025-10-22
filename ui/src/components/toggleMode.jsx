@@ -1,4 +1,3 @@
-// src/components/TorchToggle.js
 import React from "react";
 import { useTheme } from "../context/useTheme";
 import { LIGHT_MODE } from "../features/mode/lightMode";
@@ -23,10 +22,16 @@ const TorchToggle = () => {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
-            fill="currentColor"
-            className="w-6 h-6 text-yellow-900"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={1.5}
+            className="w-8 h-8 text-yellow-500"
           >
-            <path d={LIGHT_MODE.ICON} />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d={LIGHT_MODE.ICON}
+            />
           </svg>
         ) : (
           // Dark mode
