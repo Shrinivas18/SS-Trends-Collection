@@ -13,6 +13,8 @@ export const ssReducer = createSlice({
       attachment: null,
       settledAmount: "",
       balanceAmount: "",
+      isSold: "",
+      inStock:""
     },
   ],
   reducers: {
