@@ -60,7 +60,7 @@ export const MOBILE_NAVBAR = {
 
 export const LIGHT_MODE_NAVBAR = {
   NAV: " border-b border-gray-200 fixed w-full top-0 left-0 z-50 shadow-sm bg-white",
-  DIV1: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8  bg-white",
+  DIV1: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white",
   DIV2: "flex justify-between h-16 items-center",
   LINK: "h-15 w-25 md:h-20 md:w-30 object-contain",
 };
@@ -86,9 +86,9 @@ export const HOME_MD_VIDEO_DIV_TEXT =
 
 // toggle button light mode
 export const LIGHT_MODE = {
-  ICON: "M12 4V2m0 20v-2m10-8h2M2 12H0m18.364-6.364l1.414-1.414M4.222 19.778l1.414-1.414M18.364 18.364l1.414 1.414M4.222 4.222l1.414 1.414M12 6a6 6 0 100 12 6 6 0 000-12z",
+  ICON: "M12 3v2m0 14v2m9-9h-2M5 12H3m15.07 6.07l-1.41-1.41M7.34 7.34L5.93 5.93m12.02 0l-1.41 1.41M7.34 16.66l-1.41 1.41M12 8a4 4 0 100 8 4 4 0 000-8z",
   ANIMATE:
-    "bg-yellow-400 shadow-[0_0_20px_8px_rgba(255,255,0,0.6)] animate-[torch-glow_2s_ease-in-out_infinite]",
+    "bg-yellow-200 shadow-[0_0_10px_5px_rgba(255,255,0,0.6)] animate-[torch-glow_2s_ease-in-out_infinite]",
   POSITION:
     "relative mr-2 mt-4 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer",
   tooltip:
