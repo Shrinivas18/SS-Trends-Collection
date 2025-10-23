@@ -1,43 +1,31 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { ADD_ITEM } from "../../utilities/constants";
 
-export const ssReducer = createSlice({
-  name: "ssTrendsCollection",
-  initialState: [
-    {
-      code: "",
-      type: "",
-      retailPrice: "",
-      stickerPrice: "",
-      sellingPrice: "",
-      profitAmount: "",
-      attachment: null,
-      settledAmount: "",
-      balanceAmount: "",
-      isSold: "",
-      inStock:""
-    },
-  ],
-  reducers: {
-    addItem: {
-      reducer(state, action) {
-        state.push(action.payload);
-      },
-    },
+export const reducer = { itemsList: [] };
 
-    updateItem(state, action) {
-      const { id, updates } = action.payload;
-      const index = state.findIndex((item) => item.id === id);
-      if (index !== -1) {
-        state[index] = { ...state[index], ...updates };
-      }
-    },
+// {
+//   code: "",
+//   type: "",
+//   retailPrice: "",
+//   stickerPrice: "",
+//   sellingPrice: "",
+//   profitAmount: "",
+//   attachment: null,
+//   settledAmount: "",
+//   balanceAmount: "",
+//   isSold: "",
+//   inStock:""
+// },
+const ssReducer = (currentState = reducer, action) => {
+  switch (action.type) {
+    case ADD_ITEM:
+      console.log(action.payload);
+      return {
+        ...currentState,
+        itemsList: [...currentState.itemsList, action.payload],
+      };
+    default:
+      return currentState;
+  }
+};
 
-    deleteItem(state, action) {
-      return state.filter((item) => item.id !== action.payload);
-    },
-  },
-});
-
-export const { addItem, updateItem, deleteItem } = ssReducer.actions;
-
-export default ssReducer.reducer;
+export default ssReducer;

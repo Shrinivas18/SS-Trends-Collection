@@ -11,8 +11,7 @@ const Form = ({
   mode = "add",
 }) => {
   const styles = darkMode ? DARK_MODE_ADD_ITEM : ADD_ITEM;
- 
-    console.log("inside form comp::::",formData)
+
   return (
     <div className={styles.FORM_CONTAINER}>
       <div>

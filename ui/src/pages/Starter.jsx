@@ -15,9 +15,7 @@ import {
 function Starter() {
   return (
     <div className="starter-container relative min-h-screen w-full bg-black bg-opacity-90 z-50 overflow-hidden">
-      {/* === Overlapping Image Row === */}
       <div className="relative w-full max-w-[100vw] h-[60vh] mx-auto">
-        {/* White Suit (Left) */}
         <motion.svg
           initial="hidden"
           animate="visible"
@@ -38,7 +36,6 @@ function Starter() {
           />
         </motion.svg>
 
-        {/* Saree (Center) */}
         <motion.svg
           initial="hidden"
           animate="visible"
@@ -59,7 +56,6 @@ function Starter() {
           />
         </motion.svg>
 
-        {/* Red Suit (Right) */}
         <motion.svg
           initial="hidden"
           animate="visible"
@@ -81,7 +77,6 @@ function Starter() {
         </motion.svg>
       </div>
 
-      {/* === Text Section === */}
       <div className="text-center px-4 pb-10 relative z-30">
         <motion.h1
           className={WELCOME_TO_SS_TRENDS_COLLECTION}

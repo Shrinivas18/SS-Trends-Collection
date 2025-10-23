@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { useTheme } from "../context/useTheme";
 import Form from "../components/Form";
 import { v4 as uuid } from "uuid";
+import { ADD_ITEM } from "../utilities/constants";
+import { submitData } from "../features/redux/action";
 
 function AddItem() {
   const dispatch = useDispatch();
@@ -37,11 +39,7 @@ function AddItem() {
       return;
     }
 
-    dispatch({
-      type: "ADD_ITEM",
-      payload: formData,
-    });
-    console.log("inside Add compose",formData)
+    dispatch(submitData(ADD_ITEM, formData));
 
     setFormData({
       id: uuid(),

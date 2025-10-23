@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import ssReducer from "../redux/ssReducer";
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
-    counter: ssReducer,
+    ssTrendsCollection: ssReducer,
   },
 });
+
+export default store;
