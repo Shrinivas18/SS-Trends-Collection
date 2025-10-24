@@ -18,11 +18,11 @@ export const reducer = { itemsList: [] };
 const ssReducer = (currentState = reducer, action) => {
   switch (action.type) {
     case ADD_ITEM:
-      console.log(action.payload);
       return {
         ...currentState,
         itemsList: [...currentState.itemsList, action.payload],
       };
+
     default:
       return currentState;
   }
