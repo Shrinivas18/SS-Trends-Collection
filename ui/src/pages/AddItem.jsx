@@ -6,7 +6,7 @@ import { v4 as uuid } from "uuid";
 import { ADD_ITEM } from "../utilities/constants";
 import { submitData } from "../features/redux/action";
 
-function AddItem() {
+function EditForm() {
   const dispatch = useDispatch();
   const { darkMode } = useTheme();
 
@@ -16,11 +16,7 @@ function AddItem() {
     type: "SAREE",
     retailPrice: "",
     stickerPrice: "",
-    sellingPrice: "",
-    profitAmount: "",
     attachment: null,
-    settledAmount: "",
-    balanceAmount: "",
   });
 
   const handleChange = (e) => {
@@ -47,11 +43,7 @@ function AddItem() {
       type: "SAREE",
       retailPrice: "",
       stickerPrice: "",
-      sellingPrice: "",
-      profitAmount: "",
       attachment: null,
-      settledAmount: "",
-      balanceAmount: "",
     });
 
     alert("Item added successfully!");
@@ -68,4 +60,4 @@ function AddItem() {
   );
 }
 
-export default AddItem;
+export default EditForm;

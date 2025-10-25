@@ -11,7 +11,7 @@ const Form = ({
   mode = "add",
 }) => {
   const styles = darkMode ? DARK_MODE_ADD_ITEM : ADD_ITEM;
-
+  console.log(mode);
   return (
     <div className={styles.FORM_CONTAINER}>
       <div>
@@ -62,10 +62,14 @@ const Form = ({
           {[
             { name: "retailPrice", label: "Retail Price" },
             { name: "stickerPrice", label: "Sticker Price" },
-            { name: "sellingPrice", label: "Selling Price" },
-            { name: "profitAmount", label: "Profit Amount" },
-            { name: "settledAmount", label: "Settled Amount" },
-            { name: "balanceAmount", label: "Balance Amount" },
+            ...(mode === "edit"
+              ? [
+                  { name: "sellingPrice", label: "Selling Price" },
+                  { name: "profitAmount", label: "Profit Amount" },
+                  { name: "settledAmount", label: "Settled Amount" },
+                  { name: "balanceAmount", label: "Balance Amount" },
+                ]
+              : []),
           ].map((field) => (
             <div key={field.name}>
               <label htmlFor={field.name} className={styles.LABEL}>
