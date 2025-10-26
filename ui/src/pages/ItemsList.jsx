@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 function ItemsList() {
-  // Access the right part of the Redux state
   const items = useSelector((state) => state.ssTrendsCollection.itemsList);
 
   return (
