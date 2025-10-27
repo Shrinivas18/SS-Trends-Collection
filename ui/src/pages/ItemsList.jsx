@@ -23,10 +23,7 @@ function ItemsList() {
               <strong>Retail Price:</strong> {item.retailPrice}
             </p>
             <p>
-              <strong>Selling Price:</strong> {item.sellingPrice}
-            </p>
-            <p>
-              <strong>Profit:</strong> {item.profitAmount}
+              <strong>Sticker Price:</strong> {item.stickerPrice}
             </p>
             <hr />
           </div>
