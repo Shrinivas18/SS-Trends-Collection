@@ -17,10 +17,20 @@ app.get("/", (req, res) => {
   res.send("Backend is running 🚀");
 });
 
-app.post("/addItem", (req, res) => {
-  const item = req.body;
-  console.log("Received item:", item);
-  res.status(201).json({ message: "Item received!", item });
+app.post("/addItem", async (req, res) => {
+  try {
+    const { id, code, type, retailPric, stickerPrice } = req.body;
+
+    const result = await pool.query(
+      "INSERT INTO items_data (id, code, type, retailPric, stickerPrice) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+      [id, code, type, retailPric, stickerPrice]
+    );
+
+    res.status(201).json({ message: "Item added!", item: result.rows[0] });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Database insert failed" });
+  }
 });
 
 app.get("/itemById", (req, res) => {
