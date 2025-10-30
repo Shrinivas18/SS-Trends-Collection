@@ -1,7 +1,12 @@
 import pkg from "pg";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
 
-dotenv.config();
+// ✅ Resolve the correct path to .env
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+dotenv.config({ path: path.join(__dirname, ".env") });
 
 const { Pool } = pkg;
 
@@ -15,7 +20,10 @@ const pool = new Pool({
 
 pool
   .connect()
-  .then(() => console.log("✅ Connected to PostgreSQL"))
-  .catch((err) => console.error("❌ Database connection error:", err));
+  .then((client) => {
+    console.log("✅ Connected to PostgreSQL");
+    client.release();
+  })
+  .catch((err) => console.error("❌ Database connection error:", err.message));
 
 export default pool;

@@ -1,17 +1,32 @@
+import axios from "axios";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useEffect } from "react";
 
 function ItemsList() {
-  const items = useSelector((state) => state.ssTrendsCollection.itemsList);
+  const [itemsList, setItemsList] = useState([]);
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/itemsList");
+        console.log("response::", response);
+        setItemsList(response.data);
+      } catch (error) {
+        console.error("Error fetching items:", error);
+      }
+    };
 
+    fetchItems();
+  }, []);
+  console.log(itemsList);
   return (
     <div>
       <h2>Items List</h2>
 
-      {items.length === 0 ? (
+      {itemsList.length === 0 ? (
         <p>No items added yet.</p>
       ) : (
-        items.map((item) => (
+        itemsList.map((item) => (
           <div key={item.id} style={{ marginBottom: "1rem" }}>
             <p>
               <strong>Code:</strong> {item.code}

@@ -5,7 +5,7 @@ import Form from "../components/Form";
 import { v4 as uuid } from "uuid";
 import { ADD_ITEM } from "../utilities/constants";
 import { submitData } from "../features/redux/action";
-
+import axios from "axios";
 function EditForm() {
   const dispatch = useDispatch();
   const { darkMode } = useTheme();
@@ -27,12 +27,24 @@ function EditForm() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (formData.code === "" || formData.type === "") {
       alert("Please fill in all the required fields.");
       return;
+    }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/addItem",
+        formData
+      );
+      console.log("✅ Item added:", response.data);
+      alert("Item added successfully!");
+    } catch (error) {
+      console.error("❌ Error adding item:", error);
+      alert("Failed to add item.");
     }
 
     dispatch(submitData(ADD_ITEM, formData));
@@ -45,8 +57,6 @@ function EditForm() {
       stickerPrice: "",
       attachment: null,
     });
-
-    alert("Item added successfully!");
   };
 
   return (

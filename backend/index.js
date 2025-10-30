@@ -2,6 +2,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import pool from "./db.js";
 
 dotenv.config();
 
@@ -19,11 +20,14 @@ app.get("/", (req, res) => {
 
 app.post("/addItem", async (req, res) => {
   try {
-    const { id, code, type, retailPric, stickerPrice } = req.body;
+    let { id, code, type, retailPrice, stickerPrice } = req.body;
+    code = Number(code);
+    retailPrice = Number(retailPrice);
+    stickerPrice = Number(stickerPrice);
 
     const result = await pool.query(
-      "INSERT INTO items_data (id, code, type, retailPric, stickerPrice) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-      [id, code, type, retailPric, stickerPrice]
+      `INSERT INTO public.items_data ("id", "code", "type", "retailPrice", "stickerPrice") VALUES ($1, $2, $3, $4, $5)`,
+      [id, code, type, retailPrice, stickerPrice]
     );
 
     res.status(201).json({ message: "Item added!", item: result.rows[0] });
@@ -32,17 +36,14 @@ app.post("/addItem", async (req, res) => {
     res.status(500).json({ error: "Database insert failed" });
   }
 });
-
-app.get("/itemById", (req, res) => {
-  res.send("Backend is running 🚀");
-});
-
-app.get("/updateItem", (req, res) => {
-  res.send("Backend is running 🚀");
-});
-
-app.get("/itemsList", (req, res) => {
-  res.send("Backend is running 🚀");
+app.get("/itemsList", async (req, res) => {
+  try {
+    const result = await pool.query(`SELECT * FROM public.items_data`);
+    res.status(201).json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Fetch from Database failed" });
+  }
 });
 
 app.get("/deleteItem", (req, res) => {
