@@ -31,7 +31,7 @@ function EditForm() {
     e.preventDefault();
 
     if (formData.code === "" || formData.type === "") {
-      alert("Please fill in all the required fields.");
+      alert("Please fill in all the required fields");
       return;
     }
 
