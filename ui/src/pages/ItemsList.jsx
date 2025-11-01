@@ -40,6 +40,11 @@ function ItemsList() {
             <p>
               <strong>Sticker Price:</strong> {item.stickerPrice}
             </p>
+            <div>
+              <button>Edit</button>
+              <button>Delete</button>
+            </div>
+
             <hr />
           </div>
         ))
