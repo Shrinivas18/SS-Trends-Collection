@@ -41,8 +41,12 @@ function ItemsList() {
               <strong>Sticker Price:</strong> {item.stickerPrice}
             </p>
             <div>
-              <button>Edit</button>
-              <button>Delete</button>
+              <button className="m-1">
+                <strong>Edit</strong>
+              </button>
+              <button className="m-1">
+                <strong>Delete</strong>
+              </button>
             </div>
 
             <hr />
