@@ -37,9 +37,20 @@ function ItemsList() {
             <p>
               <strong>Retail Price:</strong> {item.retailPrice}
             </p>
-            <p>
-              <strong>Sticker Price:</strong> {item.stickerPrice}
-            </p>
+            {item.attachment && (
+              <div style={{ marginTop: "10px" }}>
+                <img
+                  src={item.attachment}
+                  alt="Item"
+                  style={{
+                    width: "200px",
+                    height: "auto",
+                    borderRadius: "8px",
+                    border: "1px solid #ddd",
+                  }}
+                />
+              </div>
+            )}
             <div>
               <button className="m-1">
                 <strong>Edit</strong>

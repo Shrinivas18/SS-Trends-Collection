@@ -6,6 +6,7 @@ import { v4 as uuid } from "uuid";
 import { ADD_ITEM } from "../utilities/constants";
 import { submitData } from "../features/redux/action";
 import axios from "axios";
+
 function EditForm() {
   const dispatch = useDispatch();
   const { darkMode } = useTheme();
@@ -36,10 +37,18 @@ function EditForm() {
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/addItem",
-        formData
-      );
+      const data = new FormData();
+      data.append("id", formData.id);
+      data.append("code", formData.code);
+      data.append("type", formData.type);
+      data.append("retailPrice", formData.retailPrice);
+      data.append("stickerPrice", formData.stickerPrice);
+      if (formData.attachment) data.append("attachment", formData.attachment);
+
+      const response = await axios.post("http://localhost:5000/addItem", data, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
       console.log("✅ Item added:", response.data);
       alert("Item added successfully!");
     } catch (error) {
