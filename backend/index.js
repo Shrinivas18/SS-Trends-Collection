@@ -69,6 +69,34 @@ app.get("/itemsList", async (req, res) => {
   }
 });
 
+app.get("/getItemById/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await pool.query(
+      "SELECT * FROM public.items_data WHERE id = $1",
+      [id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+
+    res.status(200).json(result.rows[0]);
+  } catch (error) {
+    console.error("Error fetching item:", error);
+    res.status(500).json({ error: "Database error" });
+  }
+});
+
+app.put("/updateItem/:id", async (req, res) => {
+  const { id } = req.params;
+  const { type, retailPrice } = req.body;
+  await pool.query(
+    "UPDATE items_data SET type = $1, retailPrice = $2 WHERE id = $3 RETURNING *",
+    [type, retailPrice, id]
+  );
+});
+
 app.get("/deleteItem", (req, res) => {
   res.send("Backend is running 🚀");
 });

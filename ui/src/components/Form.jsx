@@ -8,7 +8,7 @@ const Form = ({
   handleChange,
   handleSubmit,
   darkMode = false,
-  mode = "add",
+  mode,
 }) => {
   const styles = darkMode ? DARK_MODE_ADD_ITEM : ADD_ITEM;
 

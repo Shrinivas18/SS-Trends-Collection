@@ -16,6 +16,18 @@ function ItemsList() {
     fetchItems();
   }, []);
 
+  const handleEdit = async (id) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/getItemById/${id}`
+      );
+      console.log("resData -- ", response.data);
+    } catch (error) {
+      console.error("Error fetching item:", error);
+      alert("No Element Found with this id");
+    }
+  };
+
   return (
     <div className="px-4 sm:px-6 lg:px-10 py-10 bg-white min-h-screen">
       {/* Header */}
@@ -87,7 +99,10 @@ function ItemsList() {
 
                   {/* Desktop hover buttons */}
                   <div className="hidden lg:flex absolute bottom-3 left-1/2 -translate-x-1/2 space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <button className="bg-white text-sm px-3 py-1 rounded shadow hover:bg-gray-100 font-medium">
+                    <button
+                      className="bg-white text-sm px-3 py-1 rounded shadow hover:bg-gray-100 font-medium"
+                      onClick={() => handleEdit(item.id)}
+                    >
                       Edit
                     </button>
                     <button className="bg-black text-white text-sm px-3 py-1 rounded hover:bg-gray-800 font-medium">
