@@ -17,6 +17,7 @@ function ItemsList() {
   }, []);
 
   const handleEdit = async (id) => {
+    console.log("id::", id);
     try {
       const response = await axios.get(
         `http://localhost:5000/getItemById/${id}`
@@ -101,7 +102,7 @@ function ItemsList() {
                   <div className="hidden lg:flex absolute bottom-3 left-1/2 -translate-x-1/2 space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <button
                       className="bg-white text-sm px-3 py-1 rounded shadow hover:bg-gray-100 font-medium"
-                      onClick={() => handleEdit(item.id)}
+                      onClick={() => handleEdit(item.serial_id)}
                     >
                       Edit
                     </button>
@@ -122,7 +123,10 @@ function ItemsList() {
 
               {/* Mobile buttons (visible on small screens) */}
               <div className="flex justify-center gap-3 mt-3 lg:hidden">
-                <button className="bg-gray-100 text-sm px-3 py-1 rounded hover:bg-gray-200 font-medium">
+                <button
+                  className="bg-gray-100 text-sm px-3 py-1 rounded hover:bg-gray-200 font-medium"
+                  onClick={() => handleEdit(item.serial_id)}
+                >
                   Edit
                 </button>
                 <button className="bg-black text-white text-sm px-3 py-1 rounded hover:bg-gray-800 font-medium">

@@ -57,7 +57,6 @@ function EditForm() {
     }
 
     dispatch(submitData(ADD_ITEM, formData));
-
     setFormData({
       id: uuid(),
       code: "",

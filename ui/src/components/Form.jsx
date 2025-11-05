@@ -37,6 +37,7 @@ const Form = ({
               value={formData.code}
               onChange={handleChange}
               className={`${styles.INPUT} border-2 border-gray-300`}
+              required
             />
           </div>
 
@@ -82,6 +83,7 @@ const Form = ({
                 value={formData[field.name]}
                 onChange={handleChange}
                 className={`${styles.INPUT} border-2 border-gray-300`}
+                required
               />
             </div>
           ))}
@@ -97,6 +99,7 @@ const Form = ({
               accept="image/*"
               onChange={handleChange}
               className={`${styles.INPUT} border-2 border-gray-300`}
+              required
             />
             {formData.attachment && (
               <p className="mt-2 text-sm text-green-600 font-semibold">

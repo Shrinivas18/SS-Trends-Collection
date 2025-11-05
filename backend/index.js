@@ -45,12 +45,16 @@ app.post("/addItem", upload.single("attachment"), async (req, res) => {
     code = Number(code);
     retailPrice = Number(retailPrice);
     stickerPrice = Number(stickerPrice);
+    const now = new Date();
+    const isoString = now.toISOString();
+    const [date, timeWithMs] = isoString.split("T");
+    const time = timeWithMs.split(".")[0];
 
     const imageUrl = req.file?.location || null;
 
     const result = await pool.query(
-      `INSERT INTO public.items_data ("id", "code", "type", "retailPrice", "stickerPrice", "attachment") VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
-      [id, code, type, retailPrice, stickerPrice, imageUrl]
+      `INSERT INTO public.items_data ("id", "code", "type", "retailPrice", "stickerPrice", "attachment", "date", "time") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
+      [id, code, type, retailPrice, stickerPrice, imageUrl, date, time]
     );
 
     res.status(201).json({ message: "Item added!", item: result.rows[0] });
@@ -69,12 +73,12 @@ app.get("/itemsList", async (req, res) => {
   }
 });
 
-app.get("/getItemById/:id", async (req, res) => {
+app.get("/getItemById/:serial_id", async (req, res) => {
   try {
-    const { id } = req.params;
+    const { serial_id } = req.params;
     const result = await pool.query(
-      "SELECT * FROM public.items_data WHERE id = $1",
-      [id]
+      "SELECT * FROM public.items_data WHERE serial_id = $1",
+      [serial_id]
     );
 
     if (result.rows.length === 0) {
