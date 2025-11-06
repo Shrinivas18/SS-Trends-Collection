@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import pool from "./db.js";
 import multer from "multer";
 import multerS3 from "multer-s3";
-import { S3Client } from "@aws-sdk/client-s3";
+import { S3Client, DeleteObjectCommand } from "@aws-sdk/client-s3";
 
 dotenv.config();
 
@@ -92,14 +92,76 @@ app.get("/getItemById/:serial_id", async (req, res) => {
   }
 });
 
-app.put("/updateItem/:id", async (req, res) => {
-  const { id } = req.params;
-  const { type, retailPrice } = req.body;
-  await pool.query(
-    "UPDATE items_data SET type = $1, retailPrice = $2 WHERE id = $3 RETURNING *",
-    [type, retailPrice, id]
-  );
-});
+app.put(
+  "/updateItem/:serial_id",
+  upload.single("attachment"),
+  async (req, res) => {
+    try {
+      const { serial_id } = req.params;
+      let {
+        code,
+        type,
+        retailPrice,
+        stickerPrice,
+        sellingPrice,
+        profitAmount,
+        settledAmount,
+        balanceAmount,
+        oldAttachment,
+      } = req.body;
+
+      retailPrice = Number(retailPrice);
+      stickerPrice = Number(stickerPrice);
+
+      // ✅ If new file uploaded — delete old
+      let imageUrl = oldAttachment;
+
+      if (req.file) {
+        const oldKey = oldAttachment?.split("/").pop(); // filename from URL
+
+        if (oldKey) {
+          await s3.send(
+            new DeleteObjectCommand({
+              Bucket: process.env.AWS_BUCKET_NAME,
+              Key: oldKey,
+            })
+          );
+        }
+
+        imageUrl = req.file.location; // new image link
+      }
+
+      const updatedItem = await pool.query(
+        `UPDATE public.items_data 
+       SET code = $1, type = $2, retailPrice = $3, stickerPrice = $4,
+       sellingPrice = $5, profitAmount = $6, settledAmount = $7,
+       balanceAmount = $8, attachment = $9
+       WHERE serial_id = $10
+       RETURNING *`,
+        [
+          code,
+          type,
+          retailPrice,
+          stickerPrice,
+          sellingPrice,
+          profitAmount,
+          settledAmount,
+          balanceAmount,
+          imageUrl,
+          serial_id,
+        ]
+      );
+
+      res.json({
+        message: "✅ Item updated successfully",
+        item: updatedItem.rows[0],
+      });
+    } catch (err) {
+      console.error("❌ updateItem error:", err);
+      res.status(500).json({ error: "Update failed" });
+    }
+  }
+);
 
 app.get("/deleteItem", (req, res) => {
   res.send("Backend is running 🚀");

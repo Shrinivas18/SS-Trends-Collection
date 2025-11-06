@@ -80,6 +80,7 @@ const Navbar = () => {
               </Link>
             ))}
           </div>
+          <TorchToggle />
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">
@@ -160,7 +161,6 @@ const Navbar = () => {
           </div>
         </div>
       )}
-      <TorchToggle />
     </nav>
   );
 };

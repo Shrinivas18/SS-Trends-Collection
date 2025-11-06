@@ -9,6 +9,7 @@ const Form = ({
   handleSubmit,
   darkMode = false,
   mode,
+  newFile,
 }) => {
   const styles = darkMode ? DARK_MODE_ADD_ITEM : ADD_ITEM;
 
@@ -92,6 +93,7 @@ const Form = ({
             <label htmlFor="attachment" className={styles.LABEL}>
               Attachment
             </label>
+
             <input
               type="file"
               name="attachment"
@@ -99,13 +101,32 @@ const Form = ({
               accept="image/*"
               onChange={handleChange}
               className={`${styles.INPUT} border-2 border-gray-300`}
-              required
+              required={mode !== "edit"}
             />
-            {formData.attachment && (
+
+            {/* ✅ Show new selected file name */}
+            {newFile && (
               <p className="mt-2 text-sm text-green-600 font-semibold">
-                Selected File: {formData.attachment.name}
+                New File: {newFile.name}
               </p>
             )}
+
+            {/* ✅ Show stored image preview when editing */}
+            {!newFile &&
+              formData?.attachment &&
+              typeof formData.attachment === "string" && (
+                <div className="mt-2">
+                  <p className="text-sm text-blue-600 font-semibold">
+                    Current File: {formData.attachment.split("/").pop()}
+                  </p>
+
+                  <img
+                    src={formData.attachment}
+                    alt="Existing"
+                    className="mt-2 w-32 h-32 object-cover border rounded-md shadow"
+                  />
+                </div>
+              )}
           </div>
 
           <div className="mt-4">

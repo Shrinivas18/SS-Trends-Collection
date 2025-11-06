@@ -1,60 +1,64 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
 import { useTheme } from "../context/useTheme";
 import Form from "../components/Form";
-import { v4 as uuid } from "uuid";
-import { ADD_ITEM } from "../utilities/constants";
-import { submitData } from "../features/redux/action";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { UPDATE_ITEM } from "../utilities/constants";
+import { updateData } from "../features/redux/action";
 
-function AddItem() {
+function EditItem({ data, closeModal }) {
   const dispatch = useDispatch();
   const { darkMode } = useTheme();
 
-  const [formData, setFormData] = useState({
-    id: uuid(),
-    code: "",
-    type: "SAREE",
-    retailPrice: "",
-    stickerPrice: "",
-    sellingPrice: "",
-    profitAmount: "",
-    attachment: null,
-    settledAmount: "",
-    balanceAmount: "",
-  });
+  const [formData, setFormData] = useState(data);
+  const [newFile, setNewFile] = useState(null);
+
+  useEffect(() => {
+    setFormData(data);
+  }, [data]);
 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "file" ? files[0] : value,
-    }));
-  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (formData.code === "" || formData.type === "") {
-      alert("Please fill in all the required fields.");
+    if (type === "file") {
+      setNewFile(files[0]);
       return;
     }
 
-    dispatch(submitData(ADD_ITEM, formData));
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
-    setFormData({
-      id: uuid(),
-      code: "",
-      type: "SAREE",
-      retailPrice: "",
-      stickerPrice: "",
-      sellingPrice: "",
-      profitAmount: "",
-      attachment: null,
-      settledAmount: "",
-      balanceAmount: "",
-    });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    alert("Item added successfully!");
+    try {
+      const payload = new FormData();
+      Object.keys(formData).forEach((key) => {
+        payload.append(key, formData[key]);
+      });
+
+      if (newFile) {
+        payload.append("attachment", newFile);
+        payload.append("oldAttachment", data.attachment); // 👈 to delete old
+      }
+
+      await axios.put(
+        `http://localhost:5000/updateItem/${formData.serial_id}`,
+        payload,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+      dispatch(updateData(UPDATE_ITEM, payload));
+      alert("✅ Item updated successfully!");
+      closeModal();
+    } catch (err) {
+      console.error("❌ Update failed:", err);
+      alert("Update failed!");
+    }
   };
 
   return (
@@ -64,8 +68,9 @@ function AddItem() {
       handleSubmit={handleSubmit}
       darkMode={darkMode}
       mode="edit"
+      newFile={newFile}
     />
   );
 }
 
-export default AddItem;
+export default EditItem;

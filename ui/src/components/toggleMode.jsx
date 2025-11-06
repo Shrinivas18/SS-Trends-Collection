@@ -7,10 +7,10 @@ const TorchToggle = () => {
   const { darkMode, toggleDarkMode } = useTheme();
 
   return (
-    <div className="fixed top-[72px] right-4 z-50">
+    <div>
       <button
         onClick={toggleDarkMode}
-        className={`${LIGHT_MODE.POSITION} relative group
+        className={`${LIGHT_MODE.POSITION}
                 ${darkMode ? LIGHT_MODE.ANIMATE : DARK_MODE.ANIMATE}`}
       >
         <span className={LIGHT_MODE.tooltip}>

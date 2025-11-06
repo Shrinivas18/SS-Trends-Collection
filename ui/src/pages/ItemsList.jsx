@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Modal from "../components/Modal";
+import EditItem from "./EditForm";
 
 function ItemsList() {
   const [itemsList, setItemsList] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -22,7 +26,8 @@ function ItemsList() {
       const response = await axios.get(
         `http://localhost:5000/getItemById/${id}`
       );
-      console.log("resData -- ", response.data);
+      setSelectedItem(response.data);
+      setIsModalOpen(true);
     } catch (error) {
       console.error("Error fetching item:", error);
       alert("No Element Found with this id");
@@ -137,6 +142,13 @@ function ItemsList() {
           ))}
         </div>
       )}
+
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <EditItem
+          data={selectedItem}
+          closeModal={() => setIsModalOpen(false)}
+        />
+      </Modal>
     </div>
   );
 }
