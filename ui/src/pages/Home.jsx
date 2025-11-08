@@ -44,6 +44,7 @@ import {
 } from "../features/mode/lightMode";
 import { useTheme } from "../context/useTheme";
 import { DARK_MODE_HOME_SECTION } from "../features/mode/darkMode";
+import SareeCarousel from "../components/SareeCarousel";
 
 const images = [
   one,
@@ -99,15 +100,18 @@ function Home() {
           <source src={video} type="video/mp4" />
         </video>
 
-        <div className={HOME_MD_VIDEO_DIV}></div>
+        <div>
+          <SareeCarousel />
+        </div>
 
-        <div className={HOME_MD_VIDEO_DIV_TEXT}>
+        {/* className={HOME_MD_VIDEO_DIV} */}
+        {/* <div className={HOME_MD_VIDEO_DIV_TEXT}>
           <h1 className="text-4xl md:text-6xl font-bold mb-4">{ELEGANCE}</h1>
           <p className="text-lg md:text-xl mb-6">{EXPLORE}</p>
-          {/* <button className="px-6 py-3 bg-white text-black font-semibold rounded-md hover:bg-gray-200 transition-all cursor-pointer">
+          <button className="px-6 py-3 bg-white text-black font-semibold rounded-md hover:bg-gray-200 transition-all cursor-pointer">
             Shop Now
-          </button> */}
-        </div>
+          </button>
+        </div> */}
       </div>
 
       <section

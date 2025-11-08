@@ -79,7 +79,7 @@ export const HOME_SECTION = {
 };
 
 export const HOME_MD_VIDEO_DIV =
-  "absolute top-0 left-0 w-full h-full bg-violet-900 sm:block hidden";
+  "absolute top-0 left-0 w-full h-full bg-[#636B2F] sm:block hidden";
 
 export const HOME_MD_VIDEO_DIV_TEXT =
   "relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4";
