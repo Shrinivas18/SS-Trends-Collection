@@ -17,7 +17,7 @@ function EditForm() {
     type: "SAREE",
     retailPrice: "",
     stickerPrice: "",
-    attachment: null,
+    attachment: "",
   });
 
   const handleChange = (e) => {
@@ -63,7 +63,7 @@ function EditForm() {
       type: "SAREE",
       retailPrice: "",
       stickerPrice: "",
-      attachment: null,
+      attachment: "",
     });
   };
 

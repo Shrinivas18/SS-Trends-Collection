@@ -8,15 +8,16 @@ function ItemsList() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
 
+  const fetchItems = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/itemsList");
+      setItemsList(response.data);
+    } catch (error) {
+      console.error("Error fetching items:", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const response = await axios.get("http://localhost:5000/itemsList");
-        setItemsList(response.data);
-      } catch (error) {
-        console.error("Error fetching items:", error);
-      }
-    };
     fetchItems();
   }, []);
 

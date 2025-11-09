@@ -98,26 +98,25 @@ app.put(
   async (req, res) => {
     try {
       const { serial_id } = req.params;
-      let {
-        code,
-        type,
-        retailPrice,
-        stickerPrice,
-        sellingPrice,
-        profitAmount,
-        settledAmount,
-        balanceAmount,
-        oldAttachment,
-      } = req.body;
+      let { code, type, retailPrice, stickerPrice, sellingPrice } = req.body;
 
       retailPrice = Number(retailPrice);
       stickerPrice = Number(stickerPrice);
 
-      // ✅ If new file uploaded — delete old
       let imageUrl = oldAttachment;
 
+      // ✅ If no new file, get the original attachment
+      if (!req.file) {
+        const dbItem = await pool.query(
+          `SELECT attachment FROM public.items_data WHERE serial_id = $1`,
+          [serial_id]
+        );
+        imageUrl = dbItem.rows[0].attachment; // ✅ preserve old
+      }
+
+      // ✅ If new file uploaded — delete old
       if (req.file) {
-        const oldKey = oldAttachment?.split("/").pop(); // filename from URL
+        const oldKey = oldAttachment?.split("/").pop();
 
         if (oldKey) {
           await s3.send(
@@ -128,15 +127,13 @@ app.put(
           );
         }
 
-        imageUrl = req.file.location; // new image link
+        imageUrl = req.file.location;
       }
 
       const updatedItem = await pool.query(
         `UPDATE public.items_data 
-       SET code = $1, type = $2, retailPrice = $3, stickerPrice = $4,
-       sellingPrice = $5, profitAmount = $6, settledAmount = $7,
-       balanceAmount = $8, attachment = $9
-       WHERE serial_id = $10
+       SET "code" = $1, "type" = $2, "retailPrice" = $3, "stickerPrice" = $4, "attachment" = $5
+       WHERE "serial_id" = $10
        RETURNING *`,
         [
           code,

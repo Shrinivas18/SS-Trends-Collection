@@ -52,7 +52,7 @@ function EditItem({ data, closeModal }) {
           headers: { "Content-Type": "multipart/form-data" },
         }
       );
-      dispatch(updateData(UPDATE_ITEM, payload));
+      // dispatch(updateData(UPDATE_ITEM, payload));
       alert("✅ Item updated successfully!");
       closeModal();
     } catch (err) {
