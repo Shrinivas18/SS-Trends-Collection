@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Modal from "../components/Modal";
 import EditItem from "./EditForm";
+import ConfirmDelete from "../components/ConfirmDelete";
 
 function ItemsList() {
   const [itemsList, setItemsList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
-
+  const [confirmDeleteModal, setConfirmDeleteModal] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState(null);
   const fetchItems = async () => {
     try {
       const response = await axios.get("http://localhost:5000/itemsList");
@@ -32,6 +34,19 @@ function ItemsList() {
     } catch (error) {
       console.error("Error fetching item:", error);
       alert("No Element Found with this id");
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      await axios.delete(
+        `http://localhost:5000/deleteItem/${itemToDelete.serial_id}`
+      );
+      setConfirmDeleteModal(false);
+      setItemToDelete(null);
+      fetchItems(); // refresh list
+    } catch (error) {
+      console.error("Delete failed:", error);
     }
   };
 
@@ -86,7 +101,10 @@ function ItemsList() {
                   <button
                     className="absolute top-2 right-2 bg-white/80 backdrop-blur-sm rounded-full p-2 sm:p-1.5 shadow-md hover:bg-white transition"
                     title="Delete item"
-                    // TODO: add delete logic here later
+                    onClick={() => {
+                      setItemToDelete(item);
+                      setConfirmDeleteModal(true);
+                    }}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -149,6 +167,19 @@ function ItemsList() {
           data={selectedItem}
           closeModal={() => setIsModalOpen(false)}
         />
+      </Modal>
+
+      <Modal
+        isOpen={confirmDeleteModal}
+        onClose={() => setConfirmDeleteModal(false)}
+      >
+        {itemToDelete && (
+          <ConfirmDelete
+            itemName={itemToDelete.type}
+            onConfirm={handleDelete}
+            onCancel={() => setConfirmDeleteModal(false)}
+          />
+        )}
       </Modal>
     </div>
   );

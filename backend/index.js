@@ -160,8 +160,49 @@ app.put(
   }
 );
 
-app.get("/deleteItem", (req, res) => {
-  res.send("Backend is running 🚀");
+app.delete("/deleteItem/:serial_id", async (req, res) => {
+  try {
+    const { serial_id } = req.params;
+
+    // ✅ Fetch existing item
+    const itemResult = await pool.query(
+      `SELECT attachment FROM public.items_data WHERE serial_id = $1`,
+      [serial_id]
+    );
+
+    if (itemResult.rows.length === 0) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+
+    const attachment = itemResult.rows[0].attachment;
+
+    // ✅ If item has attachment in S3 → delete from bucket
+    if (attachment) {
+      const key = attachment.split("/").pop();
+
+      try {
+        await s3.send(
+          new DeleteObjectCommand({
+            Bucket: process.env.AWS_BUCKET_NAME,
+            Key: key,
+          })
+        );
+        console.log("✅ S3 image deleted:", key);
+      } catch (err) {
+        console.error("⚠️ Failed to delete S3 object:", err);
+      }
+    }
+
+    // ✅ Delete record from DB
+    await pool.query(`DELETE FROM public.items_data WHERE serial_id = $1`, [
+      serial_id,
+    ]);
+
+    res.status(200).json({ message: "✅ Item deleted successfully" });
+  } catch (error) {
+    console.error("❌ Delete error:", error);
+    res.status(500).json({ error: "Delete failed" });
+  }
 });
 
 // Start the server

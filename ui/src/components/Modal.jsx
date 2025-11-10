@@ -1,4 +1,6 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
 const Modal = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
@@ -7,6 +9,7 @@ const Modal = ({ isOpen, onClose, children }) => {
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
       <div
         className="
+          relative
           bg-white dark:bg-gray-800 rounded-lg 
           w-11/12 max-w-xl 
           max-h-[90vh]
@@ -14,18 +17,17 @@ const Modal = ({ isOpen, onClose, children }) => {
           flex flex-col
         "
       >
-        {/* Scrollable Content */}
-        <div className="dark:bg-gray-800 overflow-y-auto p-6">{children}</div>
+        <motion.button
+          className="absolute top-3 right-3 text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white"
+          onClick={onClose}
+          aria-label="Close"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <XMarkIcon className="w-6 h-6" />
+        </motion.button>
 
-        {/* Footer button stays fixed */}
-        <div className="p-4 border-t dark:bg-gray-800 border-gray-300 dark:border-gray-700">
-          <button
-            className="w-full px-4 py-2 dark:bg-gray-800 bg-gray-700 text-white rounded hover:bg-gray-900"
-            onClick={onClose}
-          >
-            Close
-          </button>
-        </div>
+        <div className="overflow-y-auto p-6">{children}</div>
       </div>
     </div>
   );
