@@ -16,7 +16,7 @@ export const DARK_MODE_NAVBAR = {
 
 export const DARK_MODE_MOBILE_NAVBAR = {
   button:
-    "inline-flex items-center justify-center p-2 rounded-md text-white hover:text-blue-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500",
+    "inline-flex items-center justify-center p-2 rounded-md text-white hover:text-blue-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 cursor-pointer",
   menuContainer: "md:hidden  bg-gray-900 shadow-sm text-gray-900",
   linkWrapper: "flex flex-col items-center space-y-2 py-3",
   linkBase:
@@ -44,7 +44,7 @@ export const DARK_MODE_ADD_ITEM = {
   SELECT:
     "mt-1 block w-full p-4 rounded-md border border-gray-600 bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg hover:shadow-xl transition-all ease-in-out duration-200",
   BUTTON:
-    "w-full bg-indigo-600 text-white p-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg hover:shadow-xl transition-all ease-in-out duration-200",
+    "w-full bg-indigo-600 text-white p-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg hover:shadow-xl transition-all ease-in-out duration-200 cursor-pointer",
   LABEL: "block text-sm font-semibold text-gray-300 mb-2",
   HEADER: "text-3xl font-bold text-center text-white mb-6",
   SUBTEXT: "text-sm text-gray-400 text-center mb-4",

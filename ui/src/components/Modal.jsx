@@ -18,7 +18,7 @@ const Modal = ({ isOpen, onClose, children }) => {
         "
       >
         <motion.button
-          className="absolute top-3 right-3 text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white"
+          className="absolute top-3 right-3 text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white cursor-pointer"
           onClick={onClose}
           aria-label="Close"
           whileHover={{ scale: 1.1 }}

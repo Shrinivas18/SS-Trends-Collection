@@ -21,7 +21,7 @@ const ConfirmDelete = ({ itemName, onConfirm, onCancel }) => {
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="px-4 py-2 rounded bg-gray-300 dark:bg-gray-700 text-black dark:text-white hover:bg-gray-400 dark:hover:bg-gray-600"
+          className="px-4 py-2 rounded bg-gray-300 dark:bg-gray-700 text-black dark:text-white hover:bg-gray-400 dark:hover:bg-gray-600 cursor-pointer"
           onClick={onCancel}
         >
           Cancel
@@ -30,7 +30,7 @@ const ConfirmDelete = ({ itemName, onConfirm, onCancel }) => {
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="px-4 py-2 rounded bg-red-600 text-white hover:bg-red-700"
+          className="px-4 py-2 rounded bg-red-600 text-white hover:bg-red-700 cursor-pointer"
           onClick={onConfirm}
         >
           Yes, Delete

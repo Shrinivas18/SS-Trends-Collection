@@ -57,11 +57,11 @@ function ItemsList() {
         <h2 className="text-2xl font-semibold tracking-tight">Items List</h2>
 
         <div className="flex space-x-6 text-sm text-gray-600">
-          <button className="flex items-center space-x-1 hover:underline">
+          <button className="flex items-center space-x-1 hover:underline cursor-pointer">
             <span>SORT BY</span>
             <span className="text-lg font-bold">+</span>
           </button>
-          <button className="flex items-center space-x-1 hover:underline">
+          <button className="flex items-center space-x-1 hover:underline cursor-pointer">
             <span>FILTER</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +99,7 @@ function ItemsList() {
 
                   {/* ❌ Delete button */}
                   <button
-                    className="absolute top-2 right-2 bg-white/80 backdrop-blur-sm rounded-full p-2 sm:p-1.5 shadow-md hover:bg-white transition"
+                    className="absolute top-2 right-2 bg-white/80 backdrop-blur-sm rounded-full p-2 sm:p-1.5 shadow-md hover:bg-white transition cursor-pointer"
                     title="Delete item"
                     onClick={() => {
                       setItemToDelete(item);
@@ -125,12 +125,12 @@ function ItemsList() {
                   {/* Desktop hover buttons */}
                   <div className="hidden lg:flex absolute bottom-3 left-1/2 -translate-x-1/2 space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <button
-                      className="bg-white text-sm px-3 py-1 rounded shadow hover:bg-gray-100 font-medium"
+                      className="bg-white text-sm px-3 py-1 rounded shadow hover:bg-gray-100 font-medium cursor-pointer"
                       onClick={() => handleEdit(item.serial_id)}
                     >
                       Edit
                     </button>
-                    <button className="bg-black text-white text-sm px-3 py-1 rounded hover:bg-gray-800 font-medium">
+                    <button className="bg-black text-white text-sm px-3 py-1 rounded hover:bg-gray-800 font-medium cursor-pointer">
                       Sold
                     </button>
                   </div>
@@ -148,12 +148,12 @@ function ItemsList() {
               {/* Mobile buttons (visible on small screens) */}
               <div className="flex justify-center gap-3 mt-3 lg:hidden">
                 <button
-                  className="bg-gray-100 text-sm px-3 py-1 rounded hover:bg-gray-200 font-medium"
+                  className="bg-gray-100 text-sm px-3 py-1 rounded hover:bg-gray-200 font-medium cursor-pointer"
                   onClick={() => handleEdit(item.serial_id)}
                 >
                   Edit
                 </button>
-                <button className="bg-black text-white text-sm px-3 py-1 rounded hover:bg-gray-800 font-medium">
+                <button className="bg-black text-white text-sm px-3 py-1 rounded hover:bg-gray-800 font-medium cursor-pointer">
                   Sold
                 </button>
               </div>
