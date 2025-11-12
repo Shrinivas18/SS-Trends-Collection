@@ -13,8 +13,8 @@ import {
   DARK_MODE_NAVBAR,
   DARK_MODE_MOBILE_NAVBAR,
 } from "../features/mode/darkMode";
-import TorchToggle from "./toggleMode";
 import { useTheme } from "../context/useTheme";
+import ToggleMode from "../components/ToggleMode";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -80,7 +80,7 @@ const Navbar = () => {
               </Link>
             ))}
           </div>
-          <TorchToggle />
+          {<ToggleMode />}
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">

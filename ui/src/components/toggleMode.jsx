@@ -1,52 +1,58 @@
 import React from "react";
 import { useTheme } from "../context/useTheme";
-import { LIGHT_MODE } from "../features/mode/lightMode";
-import { DARK_MODE } from "../features/mode/darkMode";
+import { Sun, Moon } from "lucide-react";
 
-const TorchToggle = () => {
+const ToggleMode = () => {
   const { darkMode, toggleDarkMode } = useTheme();
 
   return (
     <div>
+      {/* 🖥️ Desktop View */}
       <button
         onClick={toggleDarkMode}
-        className={`${LIGHT_MODE.POSITION}
-                ${darkMode ? LIGHT_MODE.ANIMATE : DARK_MODE.ANIMATE}`}
+        className={`hidden md:flex relative w-14 h-8 items-center rounded-full transition-all duration-300 cursor-pointer
+          ${darkMode ? "bg-gray-700" : "bg-yellow-300"}`}
       >
-        <span className={LIGHT_MODE.tooltip}>
-          {darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+        <span
+          className={`absolute left-1 transition-all duration-300 ${
+            darkMode ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          🌙
+        </span>
+        <span
+          className={`absolute right-1 transition-all duration-300 ${
+            darkMode ? "opacity-0" : "opacity-100"
+          }`}
+        >
+          ☀️
         </span>
 
+        <span
+          className={`absolute w-6 h-6 bg-white rounded-full shadow-md transform transition-transform duration-300
+            ${darkMode ? "translate-x-6" : "translate-x-1"}`}
+        ></span>
+      </button>
+
+      {/* Mobile View */}
+      <button
+        onClick={toggleDarkMode}
+        className={`md:hidden fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center cursor-pointer
+          shadow-lg transition-all duration-300 hover:scale-110
+          ${
+            darkMode
+              ? "bg-gray-700 text-yellow-400 drop-shadow-[0_0_12px_#facc15]"
+              : "bg-yellow-300 text-gray-800 drop-shadow-[0_0_8px_#fde047]"
+          }`}
+      >
         {darkMode ? (
-          // Light mode
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={1.5}
-            className="w-8 h-8 text-yellow-500"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d={LIGHT_MODE.ICON}
-            />
-          </svg>
+          <Moon className="w-7 h-7 animate-pulse" />
         ) : (
-          // Dark mode
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            className="w-6 h-6 text-gray-200"
-          >
-            <path d={DARK_MODE.ICON} />
-          </svg>
+          <Sun className="w-7 h-7 animate-spin-slow" />
         )}
       </button>
     </div>
   );
 };
 
-export default TorchToggle;
+export default ToggleMode;

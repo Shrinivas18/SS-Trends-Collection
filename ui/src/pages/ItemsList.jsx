@@ -3,19 +3,26 @@ import axios from "axios";
 import Modal from "../components/Modal";
 import EditItem from "./EditForm";
 import ConfirmDelete from "../components/ConfirmDelete";
+import { useTheme } from "../context/useTheme";
 
 function ItemsList() {
+  const { darkMode } = useTheme();
   const [itemsList, setItemsList] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [confirmDeleteModal, setConfirmDeleteModal] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
+
   const fetchItems = async () => {
     try {
+      setLoading(true);
       const response = await axios.get("http://localhost:5000/itemsList");
       setItemsList(response.data);
     } catch (error) {
       console.error("Error fetching items:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -24,7 +31,6 @@ function ItemsList() {
   }, []);
 
   const handleEdit = async (id) => {
-    console.log("id::", id);
     try {
       const response = await axios.get(
         `http://localhost:5000/getItemById/${id}`
@@ -44,19 +50,32 @@ function ItemsList() {
       );
       setConfirmDeleteModal(false);
       setItemToDelete(null);
-      fetchItems(); // refresh list
+      fetchItems();
     } catch (error) {
       console.error("Delete failed:", error);
     }
   };
 
   return (
-    <div className="px-4 sm:px-6 lg:px-10 py-10 bg-white min-h-screen">
+    <div
+      className={`px-4 sm:px-6 lg:px-10 py-10 min-h-screen transition-all duration-300 
+        ${darkMode ? "bg-gray-900 text-gray-100" : "bg-gray-50 text-gray-800"}`}
+    >
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 space-y-4 sm:space-y-0">
-        <h2 className="text-2xl font-semibold tracking-tight">Items List</h2>
+        <h2
+          className={`text-2xl font-semibold tracking-tight ${
+            darkMode ? "text-gray-100" : "text-gray-900"
+          }`}
+        >
+          Items List
+        </h2>
 
-        <div className="flex space-x-6 text-sm text-gray-600">
+        <div
+          className={`flex space-x-6 text-sm ${
+            darkMode ? "text-gray-300" : "text-gray-600"
+          }`}
+        >
           <button className="flex items-center space-x-1 hover:underline cursor-pointer">
             <span>SORT BY</span>
             <span className="text-lg font-bold">+</span>
@@ -81,25 +100,42 @@ function ItemsList() {
         </div>
       </div>
 
-      {/* Grid of items */}
-      {itemsList.length === 0 ? (
-        <p className="text-gray-500 text-center">No items added yet.</p>
+      {/* Items Grid */}
+      {loading ? (
+        <p className="text-gray-400 text-center">Loading items...</p>
+      ) : itemsList.length === 0 ? (
+        <p className="text-gray-500 text-center dark:text-gray-400">
+          No items added yet.
+        </p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 sm:gap-x-6 gap-y-8 sm:gap-y-10">
           {itemsList.map((item) => (
-            <div key={item.id} className="group flex flex-col relative">
+            <div
+              key={item.serial_id}
+              className={`group flex flex-col relative rounded-lg overflow-hidden shadow-md transition-all duration-300
+                ${
+                  darkMode
+                    ? "bg-gray-800 hover:bg-gray-750"
+                    : "bg-white hover:bg-gray-100"
+                }`}
+            >
               {/* Image */}
               {item.attachment && (
-                <div className="relative w-full aspect-[3/4] overflow-hidden rounded-md">
+                <div className="relative w-full aspect-[3/4] overflow-hidden">
                   <img
                     src={item.attachment}
                     alt={item.type}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
 
-                  {/* ❌ Delete button */}
+                  {/* Delete Button */}
                   <button
-                    className="absolute top-2 right-2 bg-white/80 backdrop-blur-sm rounded-full p-2 sm:p-1.5 shadow-md hover:bg-white transition cursor-pointer"
+                    className={`absolute top-2 right-2 rounded-full p-2 sm:p-1.5 shadow-md backdrop-blur-sm transition cursor-pointer
+                      ${
+                        darkMode
+                          ? "bg-gray-700/80 hover:bg-gray-600"
+                          : "bg-white/80 hover:bg-white"
+                      }`}
                     title="Delete item"
                     onClick={() => {
                       setItemToDelete(item);
@@ -111,8 +147,8 @@ function ItemsList() {
                       fill="none"
                       viewBox="0 0 24 24"
                       strokeWidth="2"
-                      stroke="currentColor"
-                      className="w-4 h-4 text-gray-600"
+                      stroke={darkMode ? "white" : "black"}
+                      className="w-4 h-4"
                     >
                       <path
                         strokeLinecap="round"
@@ -125,12 +161,24 @@ function ItemsList() {
                   {/* Desktop hover buttons */}
                   <div className="hidden lg:flex absolute bottom-3 left-1/2 -translate-x-1/2 space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <button
-                      className="bg-white text-sm px-3 py-1 rounded shadow hover:bg-gray-100 font-medium cursor-pointer"
+                      className={`text-sm px-3 py-1 rounded shadow font-medium transition cursor-pointer
+                        ${
+                          darkMode
+                            ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
+                            : "bg-white text-gray-800 hover:bg-gray-100"
+                        }`}
                       onClick={() => handleEdit(item.serial_id)}
                     >
                       Edit
                     </button>
-                    <button className="bg-black text-white text-sm px-3 py-1 rounded hover:bg-gray-800 font-medium cursor-pointer">
+                    <button
+                      className={`text-sm px-3 py-1 rounded font-medium transition cursor-pointer
+                        ${
+                          darkMode
+                            ? "bg-gray-100 text-gray-900 hover:bg-gray-200"
+                            : "bg-black text-white hover:bg-gray-800"
+                        }`}
+                    >
                       Sold
                     </button>
                   </div>
@@ -138,22 +186,44 @@ function ItemsList() {
               )}
 
               {/* Item Info */}
-              <div className="mt-3 text-sm text-gray-800 text-center">
-                <p className="uppercase tracking-wide truncate">{item.type}</p>
-                <p className="font-semibold whitespace-nowrap">
+              <div className="mt-3 text-sm text-center p-3">
+                <p
+                  className={`uppercase tracking-wide truncate ${
+                    darkMode ? "text-gray-300" : "text-gray-800"
+                  }`}
+                >
+                  {item.type}
+                </p>
+                <p
+                  className={`font-semibold ${
+                    darkMode ? "text-gray-100" : "text-gray-900"
+                  }`}
+                >
                   Rs.{item.retailPrice}.00
                 </p>
               </div>
 
-              {/* Mobile buttons (visible on small screens) */}
-              <div className="flex justify-center gap-3 mt-3 lg:hidden">
+              {/* Mobile Buttons */}
+              <div className="flex justify-center gap-3 mt-3 mb-3 lg:hidden">
                 <button
-                  className="bg-gray-100 text-sm px-3 py-1 rounded hover:bg-gray-200 font-medium cursor-pointer"
+                  className={`text-sm px-3 py-1 rounded font-medium transition cursor-pointer
+                    ${
+                      darkMode
+                        ? "bg-gray-700 text-gray-100 hover:bg-gray-600"
+                        : "bg-gray-100 text-gray-800 hover:bg-gray-200"
+                    }`}
                   onClick={() => handleEdit(item.serial_id)}
                 >
                   Edit
                 </button>
-                <button className="bg-black text-white text-sm px-3 py-1 rounded hover:bg-gray-800 font-medium cursor-pointer">
+                <button
+                  className={`text-sm px-3 py-1 rounded font-medium transition cursor-pointer
+                    ${
+                      darkMode
+                        ? "bg-gray-100 text-gray-900 hover:bg-gray-200"
+                        : "bg-black text-white hover:bg-gray-800"
+                    }`}
+                >
                   Sold
                 </button>
               </div>
@@ -162,13 +232,16 @@ function ItemsList() {
         </div>
       )}
 
+      {/* Edit Modal */}
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <EditItem
           data={selectedItem}
           closeModal={() => setIsModalOpen(false)}
+          refreshItems={fetchItems}
         />
       </Modal>
 
+      {/* Delete Confirmation Modal */}
       <Modal
         isOpen={confirmDeleteModal}
         onClose={() => setConfirmDeleteModal(false)}

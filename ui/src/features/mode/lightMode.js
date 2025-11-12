@@ -85,15 +85,15 @@ export const HOME_MD_VIDEO_DIV_TEXT =
   "relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4";
 
 // toggle button light mode
-export const LIGHT_MODE = {
-  ICON: "M12 3v2m0 14v2m9-9h-2M5 12H3m15.07 6.07l-1.41-1.41M7.34 7.34L5.93 5.93m12.02 0l-1.41 1.41M7.34 16.66l-1.41 1.41M12 8a4 4 0 100 8 4 4 0 000-8z",
-  ANIMATE:
-    "bg-yellow-200 shadow-[0_0_10px_5px_rgba(255,255,0,0.6)] animate-[torch-glow_2s_ease-in-out_infinite]",
-  POSITION:
-    "relative mr-2 mt-4 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer",
-  tooltip:
-    "absolute -top-8 mr-45 translate-x-1/2 whitespace-nowrap bg-gray-800 text-white text-xs p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none",
-};
+// export const LIGHT_MODE = {
+//   ICON: "M12 3v2m0 14v2m9-9h-2M5 12H3m15.07 6.07l-1.41-1.41M7.34 7.34L5.93 5.93m12.02 0l-1.41 1.41M7.34 16.66l-1.41 1.41M12 8a4 4 0 100 8 4 4 0 000-8z",
+//   ANIMATE:
+//     "bg-yellow-200 shadow-[0_0_10px_5px_rgba(255,255,0,0.6)] animate-[torch-glow_2s_ease-in-out_infinite]",
+//   POSITION:
+//     "relative mr-2 mt-4 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer",
+//   tooltip:
+//     "absolute -top-8 mr-45 translate-x-1/2 whitespace-nowrap bg-gray-800 text-white text-xs p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none",
+// };
 
 export const ADD_ITEM = {
   FORM_CONTAINER:

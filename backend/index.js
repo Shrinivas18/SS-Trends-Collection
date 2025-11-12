@@ -133,7 +133,7 @@ app.put(
       const updatedItem = await pool.query(
         `UPDATE public.items_data 
        SET "code" = $1, "type" = $2, "retailPrice" = $3, "stickerPrice" = $4, "attachment" = $5
-       WHERE "serial_id" = $10
+       WHERE "serial_id" = $6
        RETURNING *`,
         [
           code,
