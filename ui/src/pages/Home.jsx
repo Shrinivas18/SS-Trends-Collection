@@ -36,12 +36,7 @@ import thirtyTwo from "../assets/home/saree-offwhite3.jpeg";
 import thirtyThree from "../assets/home/suit-royal-blue.jpeg";
 import thirtyFour from "../assets/home/saree-pink.jpeg";
 import thirtyFive from "../assets/home/saree-red.jpeg";
-import { ELEGANCE, EXPLORE } from "../utilities/constants";
-import {
-  HOME_MD_VIDEO_DIV,
-  HOME_MD_VIDEO_DIV_TEXT,
-  HOME_SECTION,
-} from "../features/mode/lightMode";
+import { HOME_SECTION } from "../features/mode/lightMode";
 import { useTheme } from "../context/useTheme";
 import { DARK_MODE_HOME_SECTION } from "../features/mode/darkMode";
 import SareeCarousel from "../components/SareeCarousel";
@@ -89,29 +84,10 @@ function Home() {
 
   return (
     <div className="w-full flex flex-col items-center justify-center">
-      <div className="relative w-full h-[80vh] overflow-hidden">
-        <video
-          className="absolute top-0 left-0 w-full md:hidden"
-          autoPlay
-          muted
-          loop
-          playsInline
-        >
-          <source src={video} type="video/mp4" />
-        </video>
-
-        <div>
+      <div className="relative w-full overflow-hidden">
+        <div className="mt-10">
           <SareeCarousel />
         </div>
-
-        {/* className={HOME_MD_VIDEO_DIV} */}
-        {/* <div className={HOME_MD_VIDEO_DIV_TEXT}>
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">{ELEGANCE}</h1>
-          <p className="text-lg md:text-xl mb-6">{EXPLORE}</p>
-          <button className="px-6 py-3 bg-white text-black font-semibold rounded-md hover:bg-gray-200 transition-all cursor-pointer">
-            Shop Now
-          </button>
-        </div> */}
       </div>
 
       <section
