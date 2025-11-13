@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import silkSaree from "../assets/silkSaree.jpg";
@@ -7,7 +7,7 @@ const items = [
   {
     id: 1,
     title: "Elegant Silk Saree",
-    image: { silkSaree },
+    image: silkSaree,
   },
   {
     id: 2,
@@ -18,6 +18,21 @@ const items = [
     id: 3,
     title: "Classic Banarasi Saree",
     image: "https://placehold.co/600x400?text=Banarasi+Saree",
+  },
+  {
+    id: 4,
+    title: "Modern Georgette Saree",
+    image: "https://placehold.co/600x400?text=Ladies+Suit",
+  },
+  {
+    id: 5,
+    title: "Festive Embroidered Suit",
+    image: "https://placehold.co/600x400?text=Banarasi+Saree",
+  },
+  {
+    id: 6,
+    title: "Traditional Kanjivaram Saree",
+    image: "https://placehold.co/600x400?text=Ladies+Suit",
   },
 ];
 
@@ -32,8 +47,16 @@ export default function SareeCarousel() {
     setCurrent((prev) => (prev === items.length - 1 ? 0 : prev + 1));
   };
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev === items.length - 1 ? 0 : prev + 1));
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="relative w-full max-w-3xl mx-auto p-4">
+    <div className="relative w-full max-w-full mx-auto p-4 mt-10">
       <div className="overflow-hidden rounded-2xl shadow-xl">
         <motion.div
           className="flex"
@@ -41,15 +64,18 @@ export default function SareeCarousel() {
           transition={{ type: "spring", stiffness: 80 }}
         >
           {items.map((item) => (
-            <div key={item.id} className="min-w-full ">
+            <div key={item.id} className="min-w-full relative">
               <img
                 src={item.image}
                 alt={item.title}
-                className="w-full h-full object-cover"
+                className="w-full h-64 md:h-80 object-cover"
               />
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/80 px-4 py-2 rounded-xl text-center font-semibold">
+              <div className="absolute bottom-16 left-1/2 -translate-x-1/2 bg-white/80 px-4 py-2 rounded-xl text-center font-semibold">
                 {item.title}
               </div>
+              <button className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-pink-600 text-white px-6 py-2 rounded-full shadow-md hover:bg-pink-700 transition">
+                Shop Now
+              </button>
             </div>
           ))}
         </motion.div>

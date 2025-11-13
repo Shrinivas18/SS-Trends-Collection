@@ -1,13 +1,20 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useTheme } from "../context/useTheme";
-import Form from "../components/Form";
-import { v4 as uuid } from "uuid";
-import { ADD_ITEM } from "../utilities/constants";
-import { submitData } from "../features/redux/action";
 import axios from "axios";
+import { v4 as uuid } from "uuid";
+import { useTheme } from "../context/useTheme";
+import { submitData } from "../features/redux/action";
+import { useDispatch } from "react-redux";
+import {
+  DARK_MODE_ADD_ITEM,
+  DARK_MODE_MAIN_CLASS,
+} from "../features/mode/darkMode";
+import {
+  ADD_ITEM as LIGHT_MODE_ADD_ITEM,
+  MAIN_CLASS,
+} from "../features/mode/lightMode";
+import { ADD_ITEM } from "../utilities/constants";
 
-function EditForm() {
+function AddForm() {
   const dispatch = useDispatch();
   const { darkMode } = useTheme();
 
@@ -51,12 +58,12 @@ function EditForm() {
 
       console.log("✅ Item added:", response.data);
       alert("Item added successfully!");
+      dispatch(submitData(ADD_ITEM, formData));
     } catch (error) {
       console.error("❌ Error adding item:", error);
       alert("Failed to add item.");
     }
 
-    dispatch(submitData(ADD_ITEM, formData));
     setFormData({
       id: uuid(),
       code: "",
@@ -67,15 +74,96 @@ function EditForm() {
     });
   };
 
+  const styles = darkMode ? DARK_MODE_ADD_ITEM : LIGHT_MODE_ADD_ITEM;
+  const mainClass = darkMode ? DARK_MODE_MAIN_CLASS : MAIN_CLASS;
+
   return (
-    <Form
-      formData={formData}
-      handleChange={handleChange}
-      handleSubmit={handleSubmit}
-      darkMode={darkMode}
-      mode="add"
-    />
+    <div
+      className={`${mainClass} min-h-screen flex justify-center items-start pb-10`}
+    >
+      <div className={styles.FORM_CONTAINER}>
+        <h2 className={styles.HEADER}>Add New Item</h2>
+        <p className={styles.SUBTEXT}>
+          Fill in the details below to add a new item to your inventory.
+        </p>
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label className={styles.LABEL}>Item Code</label>
+            <input
+              type="text"
+              name="code"
+              value={formData.code}
+              onChange={handleChange}
+              className={styles.INPUT}
+              placeholder="Enter item code"
+              required
+            />
+          </div>
+
+          {/* Type */}
+          <div>
+            <label className={styles.LABEL}>Type</label>
+            <select
+              name="type"
+              value={formData.type}
+              onChange={handleChange}
+              className={styles.SELECT}
+            >
+              <option value="SAREE">SAREE</option>
+              <option value="DRESS">DRESS</option>
+              <option value="KURTI">KURTI</option>
+              <option value="TOP">TOP</option>
+            </select>
+          </div>
+
+          {/* Retail Price */}
+          <div>
+            <label className={styles.LABEL}>Retail Price (Rs)</label>
+            <input
+              type="number"
+              name="retailPrice"
+              value={formData.retailPrice}
+              onChange={handleChange}
+              className={styles.INPUT}
+              placeholder="Enter retail price"
+              required
+            />
+          </div>
+
+          {/* Sticker Price */}
+          <div>
+            <label className={styles.LABEL}>Sticker Price (Rs)</label>
+            <input
+              type="number"
+              name="stickerPrice"
+              value={formData.stickerPrice}
+              onChange={handleChange}
+              className={styles.INPUT}
+              placeholder="Enter sticker price"
+            />
+          </div>
+
+          {/* File Upload */}
+          <div>
+            <label className={styles.LABEL}>Attachment (Image)</label>
+            <input
+              type="file"
+              name="attachment"
+              accept="image/*"
+              onChange={handleChange}
+              className={`${styles.INPUT} cursor-pointer`}
+            />
+          </div>
+
+          {/* Submit Button */}
+          <button type="submit" className={styles.BUTTON}>
+            Add Item
+          </button>
+        </form>
+      </div>
+    </div>
   );
 }
 
-export default EditForm;
+export default AddForm;

@@ -1,4 +1,4 @@
-export const DARK_MODE_MAIN_CLASS = "pt-20 px-4 bg-gray-900";
+export const DARK_MODE_MAIN_CLASS = "pt-12 px-4 bg-gray-900";
 
 export const DARK_MODE = {
   ICON: "M21.752 15.002A9.718 9.718 0 0112 21.75a9.75 9.75 0 010-19.5c.84 0 1.667.11 2.457.318a.75.75 0 01.147 1.392 7.5 7.5 0 008.901 11.042.75.75 0 01.247 1.3z",
