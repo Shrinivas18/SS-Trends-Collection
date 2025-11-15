@@ -47,7 +47,6 @@ export default function SareeCarousel() {
     setCurrent((prev) => (prev === items.length - 1 ? 0 : prev + 1));
   };
 
-  // Auto-slide every 4 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev === items.length - 1 ? 0 : prev + 1));
@@ -75,12 +74,10 @@ export default function SareeCarousel() {
                 />
               </div>
 
-              {/* Title Overlay */}
               <div className="absolute bottom-16 left-1/2 -translate-x-1/2 bg-white/80 px-4 py-2 rounded-xl text-center font-semibold text-gray-900">
                 {item.title}
               </div>
 
-              {/* CTA Button */}
               <button className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-pink-600 text-white px-6 py-2 rounded-full shadow-md hover:bg-pink-700 transition">
                 Shop Now
               </button>
@@ -89,10 +86,9 @@ export default function SareeCarousel() {
         </motion.div>
       </div>
 
-      {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
-        className="absolute top-1/2 -translate-y-1/2 left-4 bg-white p-2 rounded-full shadow hover:scale-105 transition"
+        className="absolute top-1/2 -translate-y-1/2 left-4 bg-white p-2 rounded-full shadow hover:scale-105 transition "
       >
         <ChevronLeft />
       </button>

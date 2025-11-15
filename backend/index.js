@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import pool from "./db.js";
+import { v4 as uuid } from "uuid";
 import multer from "multer";
 import multerS3 from "multer-s3";
 import { S3Client, DeleteObjectCommand } from "@aws-sdk/client-s3";
@@ -41,10 +42,11 @@ app.get("/", (req, res) => {
 
 app.post("/addItem", upload.single("attachment"), async (req, res) => {
   try {
-    let { id, code, type, retailPrice, stickerPrice } = req.body;
+    let { code, type, retailPrice, sticker_price } = req.body;
+    let id = uuid();
     code = Number(code);
     retailPrice = Number(retailPrice);
-    stickerPrice = Number(stickerPrice);
+    sticker_price = Number(sticker_price);
     const now = new Date();
     const isoString = now.toISOString();
     const [date, timeWithMs] = isoString.split("T");
@@ -53,8 +55,8 @@ app.post("/addItem", upload.single("attachment"), async (req, res) => {
     const imageUrl = req.file?.location || null;
 
     const result = await pool.query(
-      `INSERT INTO public.items_data ("id", "code", "type", "retailPrice", "stickerPrice", "attachment", "date", "time") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
-      [id, code, type, retailPrice, stickerPrice, imageUrl, date, time]
+      `INSERT INTO public.items_data ("id", "code", "type", "retailPrice", "sticker_price", "attachment", "date", "time") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
+      [id, code, type, retailPrice, sticker_price, imageUrl, date, time]
     );
 
     res.status(201).json({ message: "Item added!", item: result.rows[0] });
@@ -65,7 +67,9 @@ app.post("/addItem", upload.single("attachment"), async (req, res) => {
 });
 app.get("/itemsList", async (req, res) => {
   try {
-    const result = await pool.query(`SELECT * FROM public.items_data`);
+    const result = await pool.query(
+      `SELECT id, type, sticker_price,available,attachment,issold,serial_id,date,time FROM public.items_data`
+    );
     res.status(201).json(result.rows);
   } catch (err) {
     console.error(err);
@@ -98,10 +102,10 @@ app.put(
   async (req, res) => {
     try {
       const { serial_id } = req.params;
-      let { code, type, retailPrice, stickerPrice, sellingPrice } = req.body;
+      let { code, type, retailPrice, sticker_price, sellingPrice } = req.body;
 
       retailPrice = Number(retailPrice);
-      stickerPrice = Number(stickerPrice);
+      sticker_price = Number(sticker_price);
 
       let imageUrl = oldAttachment;
 
@@ -132,14 +136,14 @@ app.put(
 
       const updatedItem = await pool.query(
         `UPDATE public.items_data 
-       SET "code" = $1, "type" = $2, "retailPrice" = $3, "stickerPrice" = $4, "attachment" = $5
+       SET "code" = $1, "type" = $2, "retailPrice" = $3, "sticker_price" = $4, "attachment" = $5
        WHERE "serial_id" = $6
        RETURNING *`,
         [
           code,
           type,
           retailPrice,
-          stickerPrice,
+          sticker_price,
           sellingPrice,
           profitAmount,
           settledAmount,

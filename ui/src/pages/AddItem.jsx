@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { v4 as uuid } from "uuid";
 import { useTheme } from "../context/useTheme";
 import { submitData } from "../features/redux/action";
 import { useDispatch } from "react-redux";
@@ -19,11 +18,10 @@ function AddForm() {
   const { darkMode } = useTheme();
 
   const [formData, setFormData] = useState({
-    id: uuid(),
     code: "",
     type: "SAREE",
     retailPrice: "",
-    stickerPrice: "",
+    sticker_price: "",
     attachment: "",
   });
 
@@ -45,11 +43,11 @@ function AddForm() {
 
     try {
       const data = new FormData();
-      data.append("id", formData.id);
+      // data.append("id", formData.id);
       data.append("code", formData.code);
       data.append("type", formData.type);
       data.append("retailPrice", formData.retailPrice);
-      data.append("stickerPrice", formData.stickerPrice);
+      data.append("sticker_price", formData.sticker_price);
       if (formData.attachment) data.append("attachment", formData.attachment);
 
       const response = await axios.post("http://localhost:5000/addItem", data, {
@@ -65,11 +63,10 @@ function AddForm() {
     }
 
     setFormData({
-      id: uuid(),
       code: "",
       type: "SAREE",
       retailPrice: "",
-      stickerPrice: "",
+      sticker_price: "",
       attachment: "",
     });
   };
@@ -136,8 +133,8 @@ function AddForm() {
             <label className={styles.LABEL}>Sticker Price (Rs)</label>
             <input
               type="number"
-              name="stickerPrice"
-              value={formData.stickerPrice}
+              name="sticker_price"
+              value={formData.sticker_price}
               onChange={handleChange}
               className={styles.INPUT}
               placeholder="Enter sticker price"

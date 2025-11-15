@@ -63,7 +63,7 @@ const Form = ({
 
           {[
             { name: "retailPrice", label: "Retail Price" },
-            { name: "stickerPrice", label: "Sticker Price" },
+            { name: "sticker_price", label: "Sticker Price" },
             ...(mode === "sold"
               ? [
                   { name: "sellingPrice", label: "Selling Price" },
